@@ -5,13 +5,12 @@ const url = "http://localhost:3001";
 function App() {
   const [terrains, setTerrains] = useState(null);
   useEffect(() => {
-    fetch(`${url}/terrains`)
-      .then((res) => res.json())
-      .then((data) => {
-        setTerrains(data);
-        console.log("Data Loaded");
-      })
-      .catch((err) => console.error(err));
+    (async () => {
+      const res = await fetch(`${url}/terrains`);
+      const data = await res.json();
+      setTerrains(data);
+      console.log("Data loaded");
+    })();
   }, []);
   return (
     <main>
