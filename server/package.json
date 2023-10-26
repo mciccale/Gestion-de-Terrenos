@@ -1,0 +1,15 @@
+{
+  "name": "terrain_management_server",
+  "version": "1.0.0",
+  "description": "Backend for the Terrain Management Application",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "LGPL-3.0-or-later",
+  "dependencies": {
+    "express": "4.18.2"
+  }
+}
