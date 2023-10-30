@@ -5,10 +5,11 @@ export class TerrainController {
   getAllTerrains = async (_req, res) => {
     try {
       const terrains = await this.terrainModel.getAllTerrains();
-      if (terrains.length === 0) {
-        res.status(404).json({ error: "Not found" });
+      if (!terrains) {
+        res.status(404).send({ error: "Not found" });
+      } else {
+        res.status(200).send(terrains);
       }
-      res.status(200).json(terrains);
     } catch (error) {
       console.log(error);
       res.status(500).json({ error });
@@ -17,15 +18,16 @@ export class TerrainController {
   getTerrainById = async (req, res) => {
     try {
       const terrain = await this.terrainModel.getTerrainById({
-        id: parseInt(req.params.id),
+        terrainId: parseInt(req.params.id),
       });
       if (!terrain) {
-        res.status(404).json({ error: "Not found" });
+        res.status(404).send({ error: "Not found" });
+      } else {
+        res.status(200).send(terrain);
       }
-      res.status(200).json(terrain);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error });
+      res.status(500).send({ error: "Not found" });
     }
   };
 }

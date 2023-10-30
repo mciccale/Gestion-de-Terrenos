@@ -19,9 +19,9 @@ function App() {
         <h3>Listado de terrenos</h3>
         {terrains ? (
           terrains.map((terrain) => (
-            <li key={terrain.id}>
-              <strong>{terrain.name}</strong>: {terrain.hectares} ha
-            </li>
+            <span key={terrain.id}>
+              <strong>{terrain.name}</strong>: {terrain.hectares} ha <br />
+            </span>
           ))
         ) : (
           <p>Loading...</p>

@@ -27,7 +27,7 @@ export class LocalTerrainModel {
       resolve(sampleTerrains);
     });
   }
-  static getTerrainById(terrainId) {
+  static getTerrainById({ terrainId }) {
     return new Promise((resolve, _reject) => {
       resolve(sampleTerrains.find(({ id }) => id === terrainId));
     });

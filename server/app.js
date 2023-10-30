@@ -1,7 +1,8 @@
 import "dotenv/config";
 import express, { json } from "express";
 import cors from "cors";
-import { createTerrainRouter } from "./routes/terrain.routes.js";
+import { mountRoutes } from "./routes/index.routes.js";
+import { LocalTerrainModel } from "./models/local/terrain.model.js";
 import { SQLTerrainModel } from "./models/psql/terrain.model.js";
 
 const app = express();
@@ -17,11 +18,12 @@ app.use(
 // Disable express header
 app.disable("x-powered-by");
 
-// Assigning a Router and a Model to /terrains route
-app.use("/terrains", createTerrainRouter({ terrainModel: SQLTerrainModel }));
+// Mounting the routes
+const models = {
+  terrain: LocalTerrainModel,
+};
+mountRoutes({ app, models });
 
-const PORT = process.env.PORT || 3001;
-
-app.listen(PORT, () => {
-  console.log(`Server listening on port: ${PORT}`);
+app.listen(process.env.PORT ?? 3001, () => {
+  console.log(`Server listening on port: ${process.env.PORT ?? 3001}`);
 });

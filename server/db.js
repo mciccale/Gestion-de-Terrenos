@@ -11,4 +11,10 @@ const pool = new pg.Pool({
   connectionTimeoutMillis: 2000,
 });
 
-export { pool };
+export const query = (text, params = []) => {
+  console.log(
+    `Text: ${text}
+    Params: ${params}`
+  );
+  return pool.query(text, params);
+};
