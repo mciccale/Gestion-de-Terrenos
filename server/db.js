@@ -11,13 +11,4 @@ const pool = new pg.Pool({
   connectionTimeoutMillis: 2000,
 });
 
-export class SQLTerrainModel {
-  static async getAllTerrains() {
-    try {
-      const response = await pool.query("SELECT * FROM terrenos");
-      return response.rows;
-    } catch (error) {
-      return [];
-    }
-  }
-}
+export { pool };

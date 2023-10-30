@@ -1,23 +1,21 @@
-import { randomUUID } from "node:crypto";
-
 const sampleTerrains = [
   {
-    id: randomUUID(),
+    id: 1,
     name: "El Álamo",
     hectares: 300,
   },
   {
-    id: randomUUID(),
+    id: 2,
     name: "Esplanada del olivero",
     hectares: 400,
   },
   {
-    id: randomUUID(),
+    id: 3,
     name: "Cultivo de zanahorias",
     hectares: 250,
   },
   {
-    id: randomUUID(),
+    id: 4,
     name: "Huertito",
     hectares: 50,
   },
@@ -26,11 +24,12 @@ const sampleTerrains = [
 export class LocalTerrainModel {
   static getAllTerrains() {
     return new Promise((resolve, _reject) => {
-      if (sampleTerrains) {
-        resolve(sampleTerrains);
-      } else {
-        resolve([]);
-      }
+      resolve(sampleTerrains);
+    });
+  }
+  static getTerrainById(terrainId) {
+    return new Promise((resolve, _reject) => {
+      resolve(sampleTerrains.find(({ id }) => id === terrainId));
     });
   }
 }

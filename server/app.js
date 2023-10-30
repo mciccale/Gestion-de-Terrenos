@@ -1,8 +1,8 @@
 import "dotenv/config";
 import express, { json } from "express";
 import cors from "cors";
-import { createTerrainRouter } from "./routes/terrain.js";
-import { SQLTerrainModel } from "./models/psql/terrain.js";
+import { createTerrainRouter } from "./routes/terrain.routes.js";
+import { SQLTerrainModel } from "./models/psql/terrain.model.js";
 
 const app = express();
 
