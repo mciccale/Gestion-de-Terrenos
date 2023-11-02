@@ -1,6 +1,102 @@
+/* Reset de estilos para eliminar márgenes y rellenos predeterminados */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Establecer la fuente predeterminada y el tamaño de fuente base */
 body {
-    background-color: rgb(20, 20, 20);
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #111;
+    color: #fff;
+}
+
+/* Encabezado de la aplicación */
+.header {
+    background-color: #000;
+    padding: 20px;
     text-align: center;
-    color: aliceblue;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* Contenedor principal de la lista de terrenos */
+.main-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #222;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.list-header {
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+/* Estilo de los elementos de la lista de terrenos */
+.list-item {
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.list-item:hover {
+    background-color: #444;
+}
+
+.list-item h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.list-item p {
+    color: #bbb;
+}
+
+/* Botón de detalle del terreno */
+.detail-button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: 600;
+}
+
+.detail-button:hover {
+    background-color: #222;
+}
+
+/* Media queries para hacer que la aplicación sea receptiva */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    .list-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    .list-item h2 {
+        font-size: 20px;
+    }
+    .list-item p {
+        margin-top: 10px;
+    }
 }

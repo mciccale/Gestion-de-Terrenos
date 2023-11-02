@@ -13,21 +13,24 @@ function App() {
     })();
   }, []);
   return (
-    <main>
-      <h1>Gestión de Terrenos</h1>
-      <article>
-        <h3>Listado de terrenos</h3>
-        {terrains ? (
-          terrains.map((terrain) => (
-            <span key={terrain.id}>
-              <strong>{terrain.name}</strong>: {terrain.hectares} ha <br />
-            </span>
-          ))
-        ) : (
-          <p>Loading...</p>
-        )}
-      </article>
-    </main>
+    <>
+      <h1 className="header">Gestión de Terrenos</h1>
+      <main className="main-container">
+        <article>
+          <h2 className="list-header">Listado de terrenos</h2>
+          {terrains ? (
+            terrains.map((terrain) => (
+              <span className="list-item" key={terrain.id}>
+                <strong>{terrain.name}</strong>
+                <br />
+              </span>
+            ))
+          ) : (
+            <p>Loading...</p>
+          )}
+        </article>
+      </main>
+    </>
   );
 }
 
