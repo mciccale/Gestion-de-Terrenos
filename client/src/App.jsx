@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
 import Menu from "./components/Menu";
-import { ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <>
-    <ToastContainer />
-    <Menu/>
+      <ToastContainer />
+      <Menu />
     </>
   );
 }
