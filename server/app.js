@@ -20,7 +20,7 @@ app.disable("x-powered-by");
 
 // Mounting the routes
 const models = {
-  terrain: LocalTerrainModel,
+  terrain: LocalTerrainModel
 };
 mountRoutes({ app, models });
 

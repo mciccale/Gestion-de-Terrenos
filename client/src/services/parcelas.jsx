@@ -1,13 +1,10 @@
 import axios from 'axios'
 
-const baseUrl = '/parcelas'
+const baseUrl = 'http://localhost:3001/terrains'
 
-const create = async newBlog => {
-    const config = {
-      headers: { Authorization: token },
-    }
-  
-    const response = await axios.post(baseUrl, newBlog, config)
+const create = async newParcela => {
+  console.log(axios.defaults.baseURL)
+    const response = await axios.get(baseUrl)
     return response.data
   }
 export default { create }

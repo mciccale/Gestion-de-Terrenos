@@ -8,8 +8,18 @@ CREATE TABLE IF NOT EXISTS terrenos (
     id SERIAL PRIMARY KEY,
     ubicacion VARCHAR(255),
     hectareas FLOAT,
-    limites POINT[],
+    limites POINT[4],
     UNIQUE (id)
+);
+-- Creamos la tabla arrendatarios
+CREATE TABLE IF NOT EXISTS arrendatarios (
+    dni VARCHAR(20) PRIMARY KEY,
+    nombre VARCHAR(50),
+    edad INT,
+    sexo CHAR,
+    fincas_alquiladas INT[],
+    parcelas_alquiladas INT[],
+    UNIQUE (dni)
 );
 -- Creamos la tabla fincas
 CREATE TABLE IF NOT EXISTS fincas (
@@ -37,20 +47,14 @@ CREATE TABLE IF NOT EXISTS parcelas (
     periodo_arrendamiento INT,
     importe_alquiler FLOAT,
     dni_arrendatario VARCHAR(20),
+    ubicacion VARCHAR(255),
+    hectareas FLOAT,
+    limites POINT[4],
     UNIQUE (id),
     FOREIGN KEY (terreno_id) REFERENCES terrenos(id),
     FOREIGN KEY (dni_arrendatario) REFERENCES arrendatarios(dni)
 );
--- Creamos la tabla arrendatarios
-CREATE TABLE IF NOT EXISTS arrendatarios (
-    dni VARCHAR(20) PRIMARY KEY,
-    nombre VARCHAR(50),
-    edad INT,
-    sexo CHAR,
-    fincas_alquiladas INT[],
-    parcelas_alquiladas INT[],
-    UNIQUE (dni)
-);
+
 -- Creamos la tabla recibos
 CREATE TABLE IF NOT EXISTS recibos (
     id SERIAL PRIMARY KEY,

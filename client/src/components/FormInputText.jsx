@@ -1,4 +1,4 @@
-const FormInput = ({ entry, setEntry, entryName }) => {
+const FormInputText = ({ entry, setEntry, entryName }) => {
     return (
         <div>
             {entryName}
@@ -13,4 +13,4 @@ const FormInput = ({ entry, setEntry, entryName }) => {
     )
 }
 
-export default FormInput
+export default FormInputText
