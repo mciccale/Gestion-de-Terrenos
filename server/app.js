@@ -4,7 +4,8 @@ import cors from "cors";
 import { mountRoutes } from "./routes/index.routes.js";
 import { LocalTerrainModel } from "./models/local/terrain.model.js";
 import { SQLTerrainModel } from "./models/psql/terrain.model.js";
-
+import { SQLParcelaModel } from "./models/psql/parcela.model.js";
+import middleware from './middlewares/middleware.js'
 const app = express();
 
 app.use(json());
@@ -14,13 +15,14 @@ app.use(
     origin: "http://localhost:5173",
   })
 );
-
+app.use(middleware.requestLogger)
 // Disable express header
 app.disable("x-powered-by");
 
 // Mounting the routes
 const models = {
-  terrain: LocalTerrainModel
+  terrain: LocalTerrainModel,
+  parcela: SQLParcelaModel
 };
 mountRoutes({ app, models });
 
