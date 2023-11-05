@@ -1,10 +1,10 @@
 import { toast } from 'react-toastify';
-import FormInputText from './FormInputText';
+import FormInput from './FormInput';
 import FormInputPoint from './FormInputPoint';
 import { useState } from 'react';
 import parcelas from '../services/parcelas';
 const RegistroParcelas = () => {
-    const [terreno_id, setTerreno_id] = useState('')
+    const [terreno_id, setTerreno_id] = useState(0)
     const [ubicacion, setUbicacion] = useState('')
     const [hectareas, setHectareas] = useState(0)
     const [coordenadas, setCoordenadas] = useState([[0, 0], [0, 0], [0, 0], [0, 0]])
@@ -22,8 +22,8 @@ const RegistroParcelas = () => {
     return (
         <>
             <form onSubmit={handleNewParcela}>
-                <FormInputText entry={terreno_id} setEntry={setTerreno_id} entryName={"ID Latifundio"} />
-                <FormInputText entry={ubicacion} setEntry={setUbicacion} entryName={"Ubicación"} />
+                <FormInput entry={terreno_id} setEntry={setTerreno_id} entryName={"ID Latifundio"} type={"number"} />
+                <FormInput entry={ubicacion} setEntry={setUbicacion} entryName={"Ubicación"} type={"text"} />
                 <div>
                     Hectáreas
                     <input

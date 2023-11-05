@@ -6,7 +6,8 @@ export const createParcelaRouter = ({ parcelaModel }) => {
   const parcelaRouter = Router();
   const parcelaController = new ParcelaController({ parcelaModel });
 
-  parcelaRouter.post("/", parcelaController.createParcela);
+  parcelaRouter.post("/", parcelaController.addParcela);
+  parcelaRouter.delete("/:id", parcelaController.deleteParcela);
 
   return parcelaRouter;
 };

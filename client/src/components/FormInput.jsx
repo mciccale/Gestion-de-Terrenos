@@ -1,10 +1,10 @@
-const FormInputText = ({ entry, setEntry, entryName }) => {
+const FormInput = ({ entry, setEntry, entryName, type }) => {
     return (
         <div>
             {entryName}
             <input
                 id={entryName}
-                type="text"
+                type={type}
                 value={entry}
                 name={`${entry}`}
                 onChange={({ target }) => setEntry(target.value)}
@@ -13,4 +13,4 @@ const FormInputText = ({ entry, setEntry, entryName }) => {
     )
 }
 
-export default FormInputText
+export default FormInput
