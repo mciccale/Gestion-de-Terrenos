@@ -32,11 +32,11 @@ export class TerrainController {
   };
   deleteTerreno = async (req, res) => {
     try {
-        const Terrenos = await this.terrainModel.deleteTerreno(req.params.id);
-        res.status(200).send(Terrenos);
+      const Terrenos = await this.terrainModel.deleteTerreno(req.params.id);
+      res.status(200).send(Terrenos);
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ error });
+      console.log(error);
+      res.status(500).json({ error });
     }
-};
+  };
 }
