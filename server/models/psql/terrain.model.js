@@ -20,4 +20,14 @@ export class SQLTerrainModel {
       console.error(error);
     }
   }
+  static async deleteParcela(terreno_id) {
+    try {
+      const query = "DELETE FROM terrenos WHERE id=$1 RETURNING *"
+      const params = [terreno_id]
+      const { rows } = await db.query(query, params)
+      return rows
+    } catch (error) {
+      console.error(error)
+    }
+  }
 }

@@ -36,7 +36,8 @@ CREATE TABLE IF NOT EXISTS fincas (
 );
 -- Creamos la tabla latifundios
 CREATE TABLE IF NOT EXISTS latifundios (
-    parcelas_id INT[]
+    FOREIGN KEY (terreno_id) REFERENCES terrenos(id),
+    FOREIGN KEY (parcela_id) REFERENCES parcelas(id)
 );
 -- Creamos la tabla parcelas
 CREATE TABLE IF NOT EXISTS parcelas (

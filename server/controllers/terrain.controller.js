@@ -30,4 +30,13 @@ export class TerrainController {
       res.status(500).send({ error: "Not found" });
     }
   };
+  deleteTerreno = async (req, res) => {
+    try {
+        const Terrenos = await this.terrainModel.deleteTerreno(req.params.id);
+        res.status(200).send(Terrenos);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+    }
+};
 }
