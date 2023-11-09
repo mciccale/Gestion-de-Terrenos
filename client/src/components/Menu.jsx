@@ -11,22 +11,23 @@ const Menu = () => {
   return (
     <>
       <div className="menu">
+        <h1>Bienvenidos</h1>
         <Link style={padding} to="/">
-          Home
+          <button>Home</button>
         </Link>
-        <Link style={padding} to="/terrenos">
-          Listado Terrenos
+        <Link  style={padding} to="/terrenos">
+          <button>Listado Terrenos</button>
         </Link>
         <Link style={padding} to="/parcelas/registro">
-          Registro Parcelas
+          <button>Registro Parcelas</button>
         </Link>
         <Link style={padding} to="/parcelas/baja">
-          Baja Parcelas
+          <button>Baja Parcelas</button>
         </Link>
       </div>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/terrenos" element={<ListadoTerrenos />} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/terrenos" element={<ListadoTerrenos/>} />
         <Route path="/parcelas/registro" element={<RegistroParcelas />} />
         <Route path="/parcelas/baja" element={<BajaParcela />} />
       </Routes>
