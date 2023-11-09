@@ -12,7 +12,7 @@ const eliminate = async bajaParcela => {
 }
 
 const modify = async modifyParcela => {
-  const response = await axios.put(`${baseUrl}/${modifyParcela.parcela_id}`)
+  const response = await axios.put(`${baseUrl}/${modifyParcela.parcela_id}`,modifyParcela)
   return response.data
 }
 

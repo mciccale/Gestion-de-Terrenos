@@ -18,16 +18,30 @@ const ListadoTerrenos = () => {
             <main className="main-container">
                 <article>
                     <h2 className="list-header">Listado de terrenos</h2>
+                    <table border="1">
+                    <thead>
+                        <tr>
+                        <th>ID</th>
+                        <th>Ubicación</th>
+                        <th>Hectáreas</th>
+                        <th>Limites</th>
+                        </tr>
+                    </thead>
                     {terrenos ? (
-                        terrenos.map((terrain) => (
-                            <span className="list-item" key={terrain.id}>
-                                <strong>{terrain.ubicacion}</strong>
-                                <br />
-                            </span>
-                        ))
+                        <tbody>
+                        {terrenos.map((terrain) => (
+                          <tr key={terrain.id}>
+                            <td>{terrain.id}</td>
+                            <td>{terrain.ubicacion}</td>
+                            <td>{terrain.hectareas}</td>
+                            <td>{JSON.stringify(terrain.limites)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
                     ) : (
                         <p>Loading...</p>
                     )}
+                    </table>
                 </article>
             </main>
         </>

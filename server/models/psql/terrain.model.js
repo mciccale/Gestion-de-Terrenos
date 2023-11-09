@@ -46,7 +46,6 @@ export class SQLTerrainModel {
       limites[3][1],
     ];
     const { rows } = await db.query(query, params);
-    console.log(rows[0]);
     return rows;
   } catch (error) {
     console.error(error);

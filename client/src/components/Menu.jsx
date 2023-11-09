@@ -4,6 +4,7 @@ import RegistroParcelas from "./RegistroParcelas";
 import BajaParcela from "./BajaParcelas";
 import Home from "./Home";
 import ModificarTerreno from "./ModificarTerreno";
+import ModificarParcela from "./ModificarParcela";
 const Menu = () => {
   const padding = {
     padding: 5,
@@ -28,6 +29,9 @@ const Menu = () => {
         <Link style={padding} to="/terrenos/modificar">
           <button>Modificar Terreno</button>
         </Link>
+        <Link style={padding} to="/parcelas/modificar">
+          <button>Modificar Parcela</button>
+        </Link>
       </div>
       <Routes>
         <Route path="/" element={<Home/>} />
@@ -35,6 +39,7 @@ const Menu = () => {
         <Route path="/parcelas/registro" element={<RegistroParcelas />} />
         <Route path="/parcelas/baja" element={<BajaParcela />} />
         <Route path="/terrenos/modificar" element={<ModificarTerreno/>} />
+        <Route path="/parcelas/modificar" element={<ModificarParcela/>} />
       </Routes>
     </>
   );

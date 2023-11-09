@@ -39,4 +39,25 @@ export class SQLParcelaModel {
       console.error(error);
     }
   }
+
+  static async modifyParcela({parcela_id,ubicacion,hectareas,coordenadas}){
+    const query = "UPDATE parcelas SET ubicacion=$2,hectareas=$3,limites=ARRAY[POINT($4,$5),POINT($6,$7),POINT($8,$9),POINT($10,$11)] WHERE id=$1 RETURNING *";
+    const params = [
+      parcela_id,
+      ubicacion,
+      hectareas,
+      coordenadas[0][0],
+      coordenadas[0][1],
+      coordenadas[1][0],
+      coordenadas[1][1],
+      coordenadas[2][0],
+      coordenadas[2][1],
+      coordenadas[3][0],
+      coordenadas[3][1],
+    ];
+    const { rows } = await db.query(query, params);
+    return rows;
+  } catch (error) {
+    console.error(error);
+  }
 }

@@ -24,4 +24,17 @@ export class ParcelaController {
             res.status(500).json({ error });
         }
     };
+    modifyParcela = async (req,res) => {
+        try{
+            const parcela = await this.parcelaModel.modifyParcela(req.body);
+            if (!parcela) {
+                res.status(404).send({ error: "Not found" });
+              } else {
+                res.status(200).send(parcela);
+              }
+            } catch (error) {
+              console.log(error);
+              res.status(500).json({ error });
+            }
+        };
 }
