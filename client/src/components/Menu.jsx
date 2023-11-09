@@ -1,46 +1,49 @@
-import { Routes, Route, Link } from "react-router-dom";
-import ListadoTerrenos from "./ListadoTerrenos";
-import RegistroParcelas from "./RegistroParcelas";
-import BajaParcela from "./BajaParcelas";
-import Home from "./Home";
-import ModificarTerreno from "./ModificarTerreno";
-import ModificarParcela from "./ModificarParcela";
+import {Link } from "react-router-dom";
+import {
+  Typography,
+  Navbar,
+  Button
+} from "@material-tailwind/react";
 const Menu = () => {
   const padding = {
-    padding: 5,
-    color: "#FFF",
+
   };
+  const Estilo = ({ texto }) => {
+    return (
+      <Typography
+        variant="h6"
+        className="mr-4 cursor-pointer py-1.5"
+      >
+        {texto}
+      </Typography>
+    )
+  }
   return (
     <>
-      <div className="menu">
-        <h1>Bienvenidos</h1>
-        <Link style={padding} to="/">
-          <button>Home</button>
-        </Link>
-        <Link  style={padding} to="/terrenos">
-          <button>Listado Terrenos</button>
-        </Link>
-        <Link style={padding} to="/parcelas/registro">
-          <button>Registro Parcelas</button>
-        </Link>
-        <Link style={padding} to="/parcelas/baja">
-          <button>Baja Parcelas</button>
-        </Link>
-        <Link style={padding} to="/terrenos/modificar">
-          <button>Modificar Terreno</button>
-        </Link>
-        <Link style={padding} to="/parcelas/modificar">
-          <button>Modificar Parcela</button>
-        </Link>
-      </div>
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/terrenos" element={<ListadoTerrenos/>} />
-        <Route path="/parcelas/registro" element={<RegistroParcelas />} />
-        <Route path="/parcelas/baja" element={<BajaParcela />} />
-        <Route path="/terrenos/modificar" element={<ModificarTerreno/>} />
-        <Route path="/parcelas/modificar" element={<ModificarParcela/>} />
-      </Routes>
+      <Navbar className="mx-auto max-w-screen-xl px-6 py-3 mb-4">
+        <div className="flex items-center justify-between text-blue-gray-900">
+          <Link style={padding} to="/">
+            <Button variant="text">
+              <Estilo texto="Home"></Estilo>
+            </Button>
+          </Link>
+          <Link style={padding} to="/terrenos">
+            <Button variant="text"><Estilo texto="Listado Terrenos"></Estilo></Button>
+          </Link>
+          <Link style={padding} to="/parcelas/registro">
+            <Button variant="text"><Estilo texto="Registro Parcelas"></Estilo></Button>
+          </Link>
+          <Link style={padding} to="/parcelas/baja">
+            <Button variant="text"><Estilo texto="Baja Parcelas"></Estilo></Button>
+          </Link>
+          <Link style={padding} to="/terrenos/modificar">
+            <Button variant="text"><Estilo texto="Modificar Terreno"></Estilo></Button>
+          </Link>
+          <Link style={padding} to="/parcelas/modificar">
+            <Button variant="text"><Estilo texto="Modificar Parcela"></Estilo></Button>
+          </Link>
+        </div>
+      </Navbar>
     </>
   );
 };

@@ -1,4 +1,8 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 /* Reset de estilos para eliminar márgenes y rellenos predeterminados */
+/*
 body, h1, h2, h3, p, ul, li {
     margin: 0;
     padding: 0;
@@ -6,6 +10,7 @@ body, h1, h2, h3, p, ul, li {
 
 
 /* Establecer la fuente predeterminada y el tamaño de fuente base */
+/*
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -14,6 +19,7 @@ body {
 }
 
 /* Encabezado de la aplicación */
+/*
 .header {
     background-color: #000;
     padding: 20px;
@@ -27,6 +33,7 @@ body {
 }
 
 /* Contenedor principal de la lista de terrenos */
+/*
 .main-container {
     max-width: 800px;
     margin: 20px auto;
@@ -44,6 +51,7 @@ body {
 }
 
 /* Estilo de los elementos de la lista de terrenos */
+/*
 .list-item {
     background-color: #222;
     border: 1px solid #444;
@@ -72,6 +80,7 @@ body {
 }
 
 /* Botón de detalle del terreno */
+/*
 .detail-button {
     background-color: #000;
     color: #fff;
@@ -88,6 +97,7 @@ body {
 }
 
 /* Media queries para hacer que la aplicación sea receptiva */
+/*
 @media (max-width: 768px) {
     .main-container {
         padding: 10px;
@@ -103,3 +113,4 @@ body {
         margin-top: 10px;
     }
 }
+*/
