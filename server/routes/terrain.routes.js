@@ -8,6 +8,7 @@ export const createTerrainRouter = ({ terrainModel }) => {
   terrainRouter.get("/", terrainController.getAllTerrains);
   terrainRouter.get("/:id", terrainController.getTerrainById);
   terrainRouter.get("/:id", terrainController.deleteTerreno);
+  terrainRouter.put("/:id", terrainController.modifyTerrain);
 
   return terrainRouter;
 };

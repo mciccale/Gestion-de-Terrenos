@@ -17,7 +17,6 @@ const RegistroParcelas = () => {
             toast.error("Formato de la parcela incorrecto");
             console.log('Formato de Parcela Incorrecto')
         }
-        return
     }
     return (
         <>

@@ -10,4 +10,10 @@ const eliminate = async bajaParcela => {
   const response = await axios.delete(`${baseUrl}/${bajaParcela.parcela_id}`)
   return response.data
 }
-export default { create, eliminate }
+
+const modify = async modifyParcela => {
+  const response = await axios.put(`${baseUrl}/${modifyParcela.parcela_id}`)
+  return response.data
+}
+
+export default { create, eliminate, modify }

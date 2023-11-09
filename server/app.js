@@ -21,7 +21,7 @@ app.disable("x-powered-by");
 
 // Mounting the routes
 const models = {
-  terrain: LocalTerrainModel,
+  terrain: SQLTerrainModel,
   parcela: SQLParcelaModel,
 };
 mountRoutes({ app, models });

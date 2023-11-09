@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 
 const ListadoTerrenos = () => {
     const url = "http://localhost:3001";
-    const [terrains, setTerrains] = useState(null);
+    const [terrenos, setTerrenos] = useState([]);
     useEffect(() => {
         (async () => {
             const res = await fetch(`${url}/terrains`);
             const data = await res.json();
-            setTerrains(data);
+            console.log(data);
+            setTerrenos(data);
             console.log("Data loaded");
         })();
     }, []);
@@ -17,10 +18,10 @@ const ListadoTerrenos = () => {
             <main className="main-container">
                 <article>
                     <h2 className="list-header">Listado de terrenos</h2>
-                    {terrains ? (
-                        terrains.map((terrain) => (
+                    {terrenos ? (
+                        terrenos.map((terrain) => (
                             <span className="list-item" key={terrain.id}>
-                                <strong>{terrain.name}</strong>
+                                <strong>{terrain.ubicacion}</strong>
                                 <br />
                             </span>
                         ))

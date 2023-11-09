@@ -3,6 +3,7 @@ import { useState } from 'react';
 import FormInput from './FormInput';
 import parcelas from '../services/parcelas';
 const bajaParcela = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [parcela_id, setParcela_id] = useState(0)
 
     const handleBajaParcela = async (event) => {

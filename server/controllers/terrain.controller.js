@@ -39,4 +39,18 @@ export class TerrainController {
       res.status(500).json({ error });
     }
   };
-}
+  modifyTerrain = async (req,res) => {
+    try {
+      const terreno = await this.terrainModel.modifyTerrain(req.body);
+      if (!terreno) {
+        res.status(404).send({ error: "Not found" });
+      } else {
+        res.status(200).send(terreno);
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error });
+    }
+    }
+  }
+
