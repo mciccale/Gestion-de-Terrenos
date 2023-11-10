@@ -17,11 +17,21 @@ const RegistroParcelas = () => {
     const handleNewParcela = async (event) => {
         event.preventDefault()
         try {
-            const newParcela = await parcelas.create({ terreno_id, ubicacion, hectareas, limites })
-            toast.success(<>Parcela registrada con éxito. Su id es {newParcela.id}</>);
+            const response = await parcelas.create({ terreno_id, ubicacion, hectareas, limites })
+            console.log(response)
+            toast.success(<>Parcela registrada con éxito. Su id es {response.id}</>);
         } catch (exception) {
-            toast.error("Formato de la parcela incorrecto");
-            console.log('Formato de Parcela Incorrecto')
+            console.log(exception.response)
+            if (exception.response.status === 400) {
+                if (!exception.response.data.code.localeCompare("23503")) {
+                    toast.error("El ID del latifundio proporcionado no existe");
+                } else {
+                    toast.error("Formato de la parcela incorrecto");
+                }
+            } else {
+                toast.error("Ha ocurrido un error en el servidor");
+                console.log('Ha ocurrido un error en el servidor')
+            }
         }
     }
     const handleReset = async (event) => {
