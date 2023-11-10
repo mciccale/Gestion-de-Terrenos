@@ -3,6 +3,7 @@ import Menu from "./components/Menu";
 import ListadoTerrenos from "./components/ListadoTerrenos";
 import RegistroParcelas from "./components/RegistroParcelas";
 import BajaParcela from "./components/BajaParcelas";
+import BajaTerrenos from "./components/BajaTerrenos";
 import Home from "./components/Home";
 import ModificarTerreno from "./components/ModificarTerreno"
 import ModificarParcela from "./components/ModificarParcela"
@@ -22,6 +23,7 @@ function App() {
           <Route path="/parcelas/baja" element={<BajaParcela />} />
           <Route path="/terrenos/modificar" element={<ModificarTerreno />} />
           <Route path="/parcelas/modificar" element={<ModificarParcela />} />
+          <Route path="/terrenos/baja" element={<BajaTerrenos />} />
         </Routes>
       </Router>
     </>
