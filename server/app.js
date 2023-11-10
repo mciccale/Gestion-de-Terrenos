@@ -1,17 +1,17 @@
-import "dotenv/config";
-import express, { json } from "express";
-import cors from "cors";
-import { mountRoutes } from "./routes/index.routes.js";
-import { LocalTerrainModel } from "./models/local/terrain.model.js";
-import { SQLTerrainModel } from "./models/psql/terrain.model.js";
-import { SQLParcelaModel } from "./models/psql/parcela.model.js";
-import middleware from "./middlewares/middleware.js";
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const { mountRoutes } = require("./routes/index.routes.js");
+const { LocalTerrainModel } = require("./models/local/terrain.model.js");
+const { SQLTerrainModel } = require("./models/psql/terrain.model.js");
+const { SQLParcelaModel } = require("./models/psql/parcela.model.js");
+const middleware = require("./middlewares/middleware.js");
 const app = express();
 
-app.use(json());
+app.use(express.json());
 app.use(
   cors({
-    // Only accept requests from Client
+    // Only accept requests = require( Client
     origin: "http://localhost:5173",
   })
 );
@@ -26,6 +26,7 @@ const models = {
 };
 mountRoutes({ app, models });
 
-app.listen(process.env.PORT ?? 3001, () => {
+const server = app.listen(process.env.PORT ?? 3001, () => {
   console.log(`Server listening on port: ${process.env.PORT ?? 3001}`);
 });
+module.exports = server 

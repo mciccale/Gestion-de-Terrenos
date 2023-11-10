@@ -13,11 +13,11 @@ const RegistroParcelas = () => {
     const [terreno_id, setTerreno_id] = useState(0)
     const [ubicacion, setUbicacion] = useState('')
     const [hectareas, setHectareas] = useState(0)
-    const [coordenadas, setCoordenadas] = useState([[0, 0], [0, 0], [0, 0], [0, 0]])
+    const [limites, setLimites] = useState([[0, 0], [0, 0], [0, 0], [0, 0]])
     const handleNewParcela = async (event) => {
         event.preventDefault()
         try {
-            const newParcela = await parcelas.create({ terreno_id, ubicacion, hectareas, coordenadas })
+            const newParcela = await parcelas.create({ terreno_id, ubicacion, hectareas, limites })
             toast.success(<>Parcela registrada con éxito. Su id es {newParcela.id}</>);
         } catch (exception) {
             toast.error("Formato de la parcela incorrecto");
@@ -29,7 +29,7 @@ const RegistroParcelas = () => {
         setTerreno_id(0)
         setUbicacion('')
         setHectareas(0)
-        setCoordenadas([[0, 0], [0, 0], [0, 0], [0, 0]])
+        setLimites([[0, 0], [0, 0], [0, 0], [0, 0]])
     }
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -54,7 +54,7 @@ const RegistroParcelas = () => {
                                 name={`hectareas`}
                                 onChange={({ target }) => setHectareas(target.value)}
                             />
-                            <FormInputPoint coordenadas={coordenadas} setCoordenadas={setCoordenadas} />
+                            <FormInputPoint limites={limites} setLimites={setLimites} />
                             <div className='flex items-center w-max gap-4'>
                                 <Button type="submit" className="mt-6" >
                                     Create

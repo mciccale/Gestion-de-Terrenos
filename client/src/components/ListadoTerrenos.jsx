@@ -7,7 +7,6 @@ const ListadoTerrenos = () => {
         (async () => {
             const res = await fetch(`${url}/terrains`);
             const data = await res.json();
-            console.log(data);
             setTerrenos(data);
             console.log("Data loaded");
         })();

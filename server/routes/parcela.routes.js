@@ -1,7 +1,7 @@
-import { Router } from "express";
-import { ParcelaController } from "../controllers/parcela.controller.js";
+const { Router } = require("express");
+const { ParcelaController } = require("../controllers/parcela.controller.js");
 
-export const createParcelaRouter = ({ parcelaModel }) => {
+const createParcelaRouter = ({ parcelaModel }) => {
   const parcelaRouter = Router();
   const parcelaController = new ParcelaController({ parcelaModel });
 
@@ -12,4 +12,4 @@ export const createParcelaRouter = ({ parcelaModel }) => {
   return parcelaRouter;
 };
 
-
+module.exports = { createParcelaRouter };

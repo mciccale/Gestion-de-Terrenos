@@ -1,7 +1,7 @@
-import { Router } from "express";
-import { TerrainController } from "../controllers/terrain.controller.js";
+const { Router } = require("express");
+const { TerrainController } = require("../controllers/terrain.controller.js");
 
-export const createTerrainRouter = ({ terrainModel }) => {
+const createTerrainRouter = ({ terrainModel }) => {
   const terrainRouter = Router();
   const terrainController = new TerrainController({ terrainModel });
 
@@ -12,3 +12,5 @@ export const createTerrainRouter = ({ terrainModel }) => {
 
   return terrainRouter;
 };
+
+module.exports = { createTerrainRouter}
