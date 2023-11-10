@@ -42,6 +42,9 @@ const Menu = () => {
           <Link style={padding} to="/parcelas/modificar">
             <Button variant="text"><Estilo texto="Modificar Parcela"></Estilo></Button>
           </Link>
+          <Link style={padding} to="/terrenos/baja">
+            <Button variant="text"><Estilo texto="Baja Terreno"></Estilo></Button>
+          </Link>
         </div>
       </Navbar>
     </>

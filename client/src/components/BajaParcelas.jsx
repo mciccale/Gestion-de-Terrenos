@@ -24,10 +24,7 @@ const bajaParcela = () => {
     }
     const handleReset = async (event) => {
         event.preventDefault()
-        setTerreno_id(0)
-        setUbicacion('')
-        setHectareas(0)
-        setCoordenadas([[0, 0], [0, 0], [0, 0], [0, 0]])
+        setParcela_id(0)
     }
     return (
         <>
@@ -39,7 +36,7 @@ const bajaParcela = () => {
                                 <FormInput entry={parcela_id} setEntry={setParcela_id} entryName={"ID Parcela"} type={"number"} />
                                 <div className='flex items-center w-max gap-4'>
                                     <Button type="submit" className="mt-6" >
-                                        Create
+                                        Dar de Baja
                                     </Button>
                                     <Button className="mt-6" onClick={handleReset}>
                                         Reset
