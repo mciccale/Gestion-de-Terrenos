@@ -27,10 +27,10 @@ class SQLParcelaModel {
         limites[3][1],
       ];
       const { rows } = await db.query(query, params);
-      console.log(rows)
       return rows[0];
     } catch (error) {
       console.error(error);
+      return error;
     }
   }
   static async deleteParcela(parcela_id) {

@@ -22,4 +22,13 @@ describe('Registrar Parcelas', () => {
             .expect('Content-Type', /application\/json/)
         expect(response.body.id).toBeEqual(response.body.id)*/
     })
+    test('Terreno inexistente', async () => {
+        const response = await api.post('/parcelas').send({ terreno_id: 4, ubicacion: "No existente", hectareas: 5, limites: [[10, 10], [10, 10], [10, 10], [10, 10]] })
+            .expect(400).expect('Content-Type', /application\/json/)
+        expect(response.body.code).toEqual("23503")
+    })
+    test('Coordenadas Mal', async () => {
+        await api.post('/parcelas').send({ terreno_id: 4, ubicacion: "No existente", hectareas: 5, limites: [[10], [10, 10], [10, 10], [10, 10]] })
+            .expect(400)
+    })
 })

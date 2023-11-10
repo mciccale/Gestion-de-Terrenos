@@ -37,8 +37,7 @@ CREATE TABLE IF NOT EXISTS fincas (
 -- Creamos la tabla latifundios
 CREATE TABLE IF NOT EXISTS latifundios (
     FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE,
-    FOREIGN KEY (parcela_id) REFERENCES parcelas(id) ON DELETE CASCADE,
-    ON DELETE CASCADE
+    FOREIGN KEY (parcela_id) REFERENCES parcelas(id) ON DELETE CASCADE
 );
 -- Creamos la tabla parcelas
 CREATE TABLE IF NOT EXISTS parcelas (

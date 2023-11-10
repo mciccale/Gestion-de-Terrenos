@@ -5,9 +5,8 @@ class ParcelaController {
     addParcela = async (req, res) => {
         try {
             const parcelas = await this.parcelaModel.addParcela(req.body);
-            console.log(parcelas)
-            if (!parcelas) {
-                res.status(404).send({ error: "Not found" });
+            if (parcelas.severity) {
+                res.status(400).send(parcelas);
             } else {
                 res.status(200).send(parcelas);
             }
