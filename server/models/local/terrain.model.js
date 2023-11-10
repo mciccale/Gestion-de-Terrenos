@@ -21,7 +21,7 @@ const sampleTerrains = [
   },
 ];
 
-export class LocalTerrainModel {
+class LocalTerrainModel {
   static getAllTerrains() {
     return new Promise((resolve, _reject) => {
       resolve(sampleTerrains);
@@ -33,3 +33,5 @@ export class LocalTerrainModel {
     });
   }
 }
+
+module.exports = { LocalTerrainModel }

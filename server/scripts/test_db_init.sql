@@ -1,8 +1,8 @@
 -- Creamos la DB si no existe
-SELECT 'CREATE DATABASE gestion_terrenos_db' 
-WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'gestion_terrenos_db')\gexec
+SELECT 'CREATE DATABASE test_gestion_terrenos_db' 
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'test_gestion_terrenos_db')\gexec
 -- Nos conectamos a la base de datos
-\c gestion_terrenos_db;
+\c test_gestion_terrenos_db;
 -- Creamos la tabla terrenos
 CREATE TABLE IF NOT EXISTS terrenos (
     id SERIAL PRIMARY KEY,
@@ -36,9 +36,10 @@ CREATE TABLE IF NOT EXISTS fincas (
 );
 -- Creamos la tabla latifundios
 CREATE TABLE IF NOT EXISTS latifundios (
+    terreno_id INT PRIMARY KEY,
+    parcela_id INT,
     FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE,
-    FOREIGN KEY (parcela_id) REFERENCES parcelas(id) ON DELETE CASCADE,
-    ON DELETE CASCADE
+    FOREIGN KEY (parcela_id) REFERENCES parcelas(id) ON DELETE CASCADE
 );
 -- Creamos la tabla parcelas
 CREATE TABLE IF NOT EXISTS parcelas (

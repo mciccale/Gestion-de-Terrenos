@@ -2,11 +2,11 @@ import {
     Typography,
     Input
 } from "@material-tailwind/react";
-const FormInputPoint = ({ coordenadas, setCoordenadas }) => {
+const FormInputPoint = ({ limites, setLimites }) => {
     const handleChange = (pos1, pos2, coordenada) => {
-        const newCoordenadas = [...coordenadas]
-        newCoordenadas[pos1][pos2] = coordenada
-        setCoordenadas(newCoordenadas)
+        const newLimites = [...limites]
+        newLimites[pos1][pos2] = coordenada
+        setLimites(newLimites)
     }
     return (
         <div className="flex flex-wrap -mx-3 mb-6">
@@ -23,7 +23,7 @@ const FormInputPoint = ({ coordenadas, setCoordenadas }) => {
                         }}
                         type="number"
                         step="any"
-                        value={coordenadas[0][0]}
+                        value={limites[0][0]}
                         name="Latitud 1"
                         onChange={({ target }) => handleChange(0, 0, target.value)}
                     />
@@ -38,7 +38,7 @@ const FormInputPoint = ({ coordenadas, setCoordenadas }) => {
                         }}
                         type="number"
                         step="any"
-                        value={coordenadas[0][1]}
+                        value={limites[0][1]}
                         name="Longitud 1"
                         onChange={({ target }) => handleChange(0, 1, target.value)}
                     />
@@ -55,7 +55,7 @@ const FormInputPoint = ({ coordenadas, setCoordenadas }) => {
                         }}
                         type="number"
                         step="any"
-                        value={coordenadas[1][0]}
+                        value={limites[1][0]}
                         name="Latitud 2"
                         onChange={({ target }) => handleChange(1, 0, target.value)}
                     />
@@ -70,7 +70,7 @@ const FormInputPoint = ({ coordenadas, setCoordenadas }) => {
                         }}
                         type="number"
                         step="any"
-                        value={coordenadas[1][1]}
+                        value={limites[1][1]}
                         name="Longitud 2"
                         onChange={({ target }) => handleChange(1, 1, target.value)}
                     />
@@ -88,7 +88,7 @@ const FormInputPoint = ({ coordenadas, setCoordenadas }) => {
                         }}
                         type="number"
                         step="any"
-                        value={coordenadas[2][0]}
+                        value={limites[2][0]}
                         name="Latitud 3"
                         onChange={({ target }) => handleChange(2, 0, target.value)}
                     />
@@ -104,7 +104,7 @@ const FormInputPoint = ({ coordenadas, setCoordenadas }) => {
                         }}
                         type="number"
                         step="any"
-                        value={coordenadas[2][1]}
+                        value={limites[2][1]}
                         name="Longitud 3"
                         onChange={({ target }) => handleChange(2, 1, target.value)}
                     />
@@ -122,7 +122,7 @@ const FormInputPoint = ({ coordenadas, setCoordenadas }) => {
                         }}
                         type="number"
                         step="any"
-                        value={coordenadas[3][0]}
+                        value={limites[3][0]}
                         name="Latitud 4"
                         onChange={({ target }) => handleChange(3, 0, target.value)}
                     />
@@ -138,7 +138,7 @@ const FormInputPoint = ({ coordenadas, setCoordenadas }) => {
                         }}
                         type="number"
                         step="any"
-                        value={coordenadas[3][1]}
+                        value={limites[3][1]}
                         name="Longitud 4"
                         onChange={({ target }) => handleChange(3, 1, target.value)}
                     />
