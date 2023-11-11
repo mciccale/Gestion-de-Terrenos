@@ -14,14 +14,14 @@ const Menu = () => {
               <Estilo texto="Home"></Estilo>
             </Button>
           </Link>
-          <Link style={padding} to="/terrenos">
-            <Button variant="text">
-              <Estilo texto="Listado Terrenos"></Estilo>
-            </Button>
-          </Link>
           <Link style={padding} to="/parcelas/registro">
             <Button variant="text">
               <Estilo texto="Registro Parcelas"></Estilo>
+            </Button>
+          </Link>
+          <Link style={padding} to="/parcelas/modificar">
+            <Button variant="text">
+              <Estilo texto="Modificar Parcela"></Estilo>
             </Button>
           </Link>
           <Link style={padding} to="/parcelas/baja">
@@ -29,14 +29,14 @@ const Menu = () => {
               <Estilo texto="Baja Parcelas"></Estilo>
             </Button>
           </Link>
+          <Link style={padding} to="/terrenos">
+            <Button variant="text">
+              <Estilo texto="Listado Terrenos"></Estilo>
+            </Button>
+          </Link>
           <Link style={padding} to="/terrenos/modificar">
             <Button variant="text">
               <Estilo texto="Modificar Terreno"></Estilo>
-            </Button>
-          </Link>
-          <Link style={padding} to="/parcelas/modificar">
-            <Button variant="text">
-              <Estilo texto="Modificar Parcela"></Estilo>
             </Button>
           </Link>
           <Link style={padding} to="/terrenos/baja">
