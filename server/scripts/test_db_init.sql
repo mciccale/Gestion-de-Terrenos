@@ -34,13 +34,6 @@ CREATE TABLE IF NOT EXISTS fincas (
     FOREIGN KEY (dni_arrendatario) REFERENCES arrendatarios(dni) ON DELETE SET NULL,
     CHECK (tipo_finca IN ('avícola', 'ganadera'))
 );
--- Creamos la tabla latifundios
-CREATE TABLE IF NOT EXISTS latifundios (
-    terreno_id INT PRIMARY KEY,
-    parcela_id INT,
-    FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE,
-    FOREIGN KEY (parcela_id) REFERENCES parcelas(id) ON DELETE CASCADE
-);
 -- Creamos la tabla parcelas
 CREATE TABLE IF NOT EXISTS parcelas (
     id SERIAL PRIMARY KEY,
@@ -57,7 +50,13 @@ CREATE TABLE IF NOT EXISTS parcelas (
     FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE,
     FOREIGN KEY (dni_arrendatario) REFERENCES arrendatarios(dni) ON DELETE SET NULL
 );
-
+-- Creamos la tabla latifundios
+CREATE TABLE IF NOT EXISTS latifundios (
+    terreno_id INT PRIMARY KEY,
+    parcela_id INT,
+    FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE,
+    FOREIGN KEY (parcela_id) REFERENCES parcelas(id) ON DELETE CASCADE
+);
 -- Creamos la tabla recibos
 CREATE TABLE IF NOT EXISTS recibos (
     id SERIAL PRIMARY KEY,

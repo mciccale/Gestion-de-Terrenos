@@ -39,7 +39,7 @@ class TerrainController {
       res.status(500).json({ error });
     }
   };
-  modifyTerrain = async (req,res) => {
+  modifyTerrain = async (req, res) => {
     try {
       const terreno = await this.terrainModel.modifyTerrain(req.body);
       if (!terreno) {
@@ -51,19 +51,19 @@ class TerrainController {
       console.log(error);
       res.status(500).json({ error });
     }
-    }
-  }
+  };
   addTerrain = async (req, res) => {
     try {
-        const Terrenos = await this.terrainModel.addTerrain(req.body);
-        if (!Terrenos) {
-            res.status(404).send({ error: "Not found" });
-        } else {
-            res.status(200).send(Terrenos);
-        }
+      const Terrenos = await this.terrainModel.addTerrain(req.body);
+      if (!Terrenos) {
+        res.status(404).send({ error: "Not found" });
+      } else {
+        res.status(200).send(Terrenos);
+      }
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ error });
+      console.log(error);
+      res.status(500).json({ error });
     }
-};
+  };
+}
 module.exports = { TerrainController };

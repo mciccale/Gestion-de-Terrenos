@@ -6,6 +6,7 @@ const createTerrainRouter = ({ terrainModel }) => {
   const terrainController = new TerrainController({ terrainModel });
 
   terrainRouter.get("/", terrainController.getAllTerrains);
+  terrainRouter.post("/", terrainController.addTerrain);
   terrainRouter.get("/:id", terrainController.getTerrainById);
   terrainRouter.delete("/:id", terrainController.deleteTerreno);
   terrainRouter.put("/:id", terrainController.modifyTerrain);
@@ -13,4 +14,4 @@ const createTerrainRouter = ({ terrainModel }) => {
   return terrainRouter;
 };
 
-module.exports = { createTerrainRouter}
+module.exports = { createTerrainRouter };

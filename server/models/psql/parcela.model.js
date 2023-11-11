@@ -1,6 +1,16 @@
 const db = require("../../database/db.js");
 
 class SQLParcelaModel {
+  static async getParcelaById({ parcelaId }) {
+    try {
+      const query = "SELECT * FROM parcelas WHERE id = $1";
+      const params = [parcelaId];
+      const { rows } = await db.query(query, params);
+      return rows[0];
+    } catch (error) {
+      console.error(error);
+    }
+  }
   static async addParcela({ terreno_id, ubicacion, hectareas, limites }) {
     try {
       //falta añadir el terreno_id
@@ -46,7 +56,8 @@ class SQLParcelaModel {
 
   static async modifyParcela({ parcela_id, ubicacion, hectareas, limites }) {
     try {
-      const query = "UPDATE parcelas SET ubicacion=$2,hectareas=$3,limites=ARRAY[POINT($4,$5),POINT($6,$7),POINT($8,$9),POINT($10,$11)] WHERE id=$1 RETURNING *";
+      const query =
+        "UPDATE parcelas SET ubicacion=$2,hectareas=$3,limites=ARRAY[POINT($4,$5),POINT($6,$7),POINT($8,$9),POINT($10,$11)] WHERE id=$1 RETURNING *";
       const params = [
         parcela_id,
         ubicacion,

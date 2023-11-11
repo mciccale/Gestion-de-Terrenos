@@ -1,23 +1,10 @@
-import {Link } from "react-router-dom";
-import {
-  Typography,
-  Navbar,
-  Button
-} from "@material-tailwind/react";
-const Menu = () => {
-  const padding = {
+import Estilo from "./Estilo";
+import { Link } from "react-router-dom";
+import { Navbar, Button } from "@material-tailwind/react";
 
-  };
-  const Estilo = ({ texto }) => {
-    return (
-      <Typography
-        variant="h6"
-        className="mr-4 cursor-pointer py-1.5"
-      >
-        {texto}
-      </Typography>
-    )
-  }
+const Menu = () => {
+  const padding = {};
+
   return (
     <>
       <Navbar className="mx-auto max-w-screen-xl px-6 py-3 mb-4">
@@ -28,26 +15,39 @@ const Menu = () => {
             </Button>
           </Link>
           <Link style={padding} to="/terrenos">
-            <Button variant="text"><Estilo texto="Listado Terrenos"></Estilo></Button>
+            <Button variant="text">
+              <Estilo texto="Listado Terrenos"></Estilo>
+            </Button>
           </Link>
           <Link style={padding} to="/parcelas/registro">
-            <Button variant="text"><Estilo texto="Registro Parcelas"></Estilo></Button>
+            <Button variant="text">
+              <Estilo texto="Registro Parcelas"></Estilo>
+            </Button>
           </Link>
           <Link style={padding} to="/parcelas/baja">
-            <Button variant="text"><Estilo texto="Baja Parcelas"></Estilo></Button>
+            <Button variant="text">
+              <Estilo texto="Baja Parcelas"></Estilo>
+            </Button>
           </Link>
           <Link style={padding} to="/terrenos/modificar">
-            <Button variant="text"><Estilo texto="Modificar Terreno"></Estilo></Button>
+            <Button variant="text">
+              <Estilo texto="Modificar Terreno"></Estilo>
+            </Button>
           </Link>
           <Link style={padding} to="/parcelas/modificar">
-            <Button variant="text"><Estilo texto="Modificar Parcela"></Estilo></Button>
+            <Button variant="text">
+              <Estilo texto="Modificar Parcela"></Estilo>
+            </Button>
           </Link>
           <Link style={padding} to="/terrenos/baja">
-            <Button variant="text"><Estilo texto="Baja Terreno"></Estilo></Button>
+            <Button variant="text">
+              <Estilo texto="Baja Terreno"></Estilo>
+            </Button>
           </Link>
         </div>
       </Navbar>
     </>
   );
 };
+
 export default Menu;

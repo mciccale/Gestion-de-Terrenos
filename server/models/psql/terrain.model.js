@@ -22,18 +22,19 @@ class SQLTerrainModel {
   }
   static async deleteTerreno(terreno_id) {
     try {
-      const query = "DELETE FROM terrenos WHERE id=$1 RETURNING *"
-      const params = [terreno_id]
-      const { rows } = await db.query(query, params)
-      return rows
+      const query = "DELETE FROM terrenos WHERE id=$1 RETURNING *";
+      const params = [terreno_id];
+      const { rows } = await db.query(query, params);
+      return rows;
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
   static async addTerrain({ ubicacion, hectareas, limites }) {
     try {
       console.log(limites[0]);
-      const query = "INSERT INTO terrenos(ubicacion, hectareas, limites) VALUES ($1,$2,ARRAY[POINT($3,$4),POINT($5,$6),POINT($7,$8),POINT($9,$10)]) RETURNING *";
+      const query =
+        "INSERT INTO terrenos(ubicacion, hectareas, limites) VALUES ($1,$2,ARRAY[POINT($3,$4),POINT($5,$6),POINT($7,$8),POINT($9,$10)]) RETURNING *";
       const params = [
         ubicacion,
         hectareas,
@@ -47,16 +48,16 @@ class SQLTerrainModel {
         limites[3][1],
       ];
       const { rows } = await db.query(query, params);
-      console.log(rows)
-      return rows;
+      console.log(rows);
+      return rows[0];
     } catch (error) {
-      console.log("----------------------");
       console.log(error);
     }
   }
   static async modifyTerrain({ terreno_id, ubicacion, hectareas, limites }) {
     try {
-      const query = "UPDATE terrenos SET ubicacion=$2,hectareas=$3,limites=ARRAY[POINT($4,$5),POINT($6,$7),POINT($8,$9),POINT($10,$11)] where id=$1 RETURNING *";
+      const query =
+        "UPDATE terrenos SET ubicacion=$2,hectareas=$3,limites=ARRAY[POINT($4,$5),POINT($6,$7),POINT($8,$9),POINT($10,$11)] where id=$1 RETURNING *";
       const params = [
         terreno_id,
         ubicacion,

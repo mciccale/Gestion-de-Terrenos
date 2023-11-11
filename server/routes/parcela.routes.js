@@ -6,6 +6,7 @@ const createParcelaRouter = ({ parcelaModel }) => {
   const parcelaController = new ParcelaController({ parcelaModel });
 
   parcelaRouter.post("/", parcelaController.addParcela);
+  parcelaRouter.get("/:id", parcelaController.getParcelaById);
   parcelaRouter.delete("/:id", parcelaController.deleteParcela);
   parcelaRouter.put("/:id", parcelaController.modifyParcela);
 
