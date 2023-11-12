@@ -96,3 +96,50 @@ describe("Obtener terrenos", () => {
     expect(response.body.length).toBeGreaterThan(0);
   });
 });
+
+describe("Modificar terrenos", () => {
+  test("lista de terrenos existentes", async () => {
+    
+    const newTerrain = await SQLTerrainModel.addTerrain({
+      ubicacion: "Madrid",
+      hectareas: 100,
+      limites: [
+        [10, 10],
+        [10, 10],
+        [10, 10],
+        [10, 10],
+      ],
+    });
+
+    expect(newTerrain).toBeDefined();
+    expect(newTerrain.hectareas).toBe(100);
+    expect(newTerrain.ubicacion).toBe("Madrid");
+
+    const updatedTerrain = await SQLTerrainModel.modifyTerrain({
+      terreno_id: newTerrain.id,
+      ubicacion: "Barcelona",
+      hectareas: 150,
+      limites: [
+        [15, 15],
+        [15, 15],
+        [15, 15],
+        [15, 15],
+      ],
+    });
+
+    // Get the specific modified terrain from the array
+    const modifiedTerrains = await api
+      .get("/terrenos")
+      .expect(200)
+      .expect("Content-Type", /application\/json/);
+
+    const modifiedTerrain = modifiedTerrains.body.find(t => t.id === newTerrain.id);
+
+    expect(modifiedTerrain).toBeDefined();
+    expect(modifiedTerrain.hectareas).toBe(150); 
+    expect(modifiedTerrain.ubicacion).toBe("Barcelona");
+  });
+});
+
+
+

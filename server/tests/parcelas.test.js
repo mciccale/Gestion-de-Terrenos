@@ -54,6 +54,7 @@ describe("Registrar Parcelas", () => {
       .expect("Content-Type", /application\/json/);
 
     expect(response.body.id).toBeDefined();
+
     const get = await api.get('/parcelas/' + response.body.id)
       .expect(200)
       .expect('Content-Type', /application\/json/)
@@ -98,5 +99,50 @@ describe("Baja Parcela", () => {
   });
   test("Parcela inexistente", async () => {
     await api.delete("/parcelas/" + 4).expect(404);
+  });
+});
+
+describe("Modificar terrenos", () => {
+  test("lista de terrenos existentes", async () => {
+    
+    const response = await api
+    .post("/parcelas")
+    .send({
+      terreno_id: newTerrain.id,
+      ubicacion: "Navalcarnero",
+      hectareas: 5,
+      limites: [
+        [2, 2],
+        [2, 2],
+        [2, 2],
+        [2, 2],
+      ],
+    })
+    .expect(200)
+    .expect("Content-Type", /application\/json/);
+
+    expect(response.body.id).toBeDefined();
+
+    const updatedTerrain = await SQLParcelaModel.modifyParcela({
+      parcela_id: response.body.id,
+      ubicacion: "Barcelona",
+      hectareas: 120,
+      limites: [
+        [15, 15],
+        [15, 15],
+        [15, 15],
+        [15, 15],
+      ],
+    });
+
+    const modifiedParcela = await api.get('/parcelas/' + response.body.id)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+      expect(modifiedParcela.body.id).toEqual(response.body.id);
+
+      expect(modifiedParcela).toBeDefined();
+      expect(modifiedParcela.body.hectareas).toBe(120); 
+      expect(modifiedParcela.body.ubicacion).toBe("Barcelona");
   });
 });
