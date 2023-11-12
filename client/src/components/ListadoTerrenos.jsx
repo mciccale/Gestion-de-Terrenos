@@ -105,7 +105,11 @@ const ListadoTerrenos = () => {
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {JSON.stringify(terrain.limites)}
+                          {terrain.limites.map(({ x, y }, i) => (
+                            <span key={i}>
+                              ({x}, {y})
+                            </span>
+                          ))}
                         </Typography>
                       </td>
                       <td>
