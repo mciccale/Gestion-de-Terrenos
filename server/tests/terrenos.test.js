@@ -45,6 +45,7 @@ describe("Borrar Terreno", () => {
       ],
     });
 
+
     // Lo borramos y vemos si ha ido bien la operación
     const response = await api
       .delete(`/terrenos/${newTerrain.id}`)
@@ -53,5 +54,45 @@ describe("Borrar Terreno", () => {
       .expect("Content-Type", /application\/json/);
 
     expect(response.body).toBeDefined();
+  });
+});
+
+describe("Obtener terrenos", () => {
+  test("lista de terrenos existentes", async () => {
+    // Realizamos una solicitud para obtener la lista de terrenos
+    await api
+      .post("/terrenos")
+      .send({
+        ubicacion: "Almudena Grande",
+        hectareas: 5,
+        limites: [
+          [2, 2],
+          [2, 2],
+          [2, 2],
+          [2, 2],
+        ],
+      })
+
+      await api
+      .post("/terrenos")
+      .send({
+        ubicacion: "Barcelona",
+        hectareas: 100,
+        limites: [
+          [2, 4],
+          [2, 3],
+          [1, 2],
+          [2, 2],
+        ],
+      })
+
+    const response = await api
+      .get("/terrenos")
+      .expect(200)
+      .expect("Content-Type", /application\/json/);
+
+    // Obtenemos los terrenos
+    expect(response.body).toBeDefined();
+    expect(response.body.length).toBeGreaterThan(0);
   });
 });
