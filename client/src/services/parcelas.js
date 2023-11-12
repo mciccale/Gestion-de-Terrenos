@@ -16,6 +16,7 @@ const create = async (newParcela) => {
   const response = await axios.post(baseUrl, newParcela);
   return response.data;
 };
+
 const eliminate = async (bajaParcela) => {
   const response = await axios.delete(`${baseUrl}/${bajaParcela.parcela_id}`);
   return response.data;

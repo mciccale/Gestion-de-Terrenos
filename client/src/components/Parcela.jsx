@@ -21,11 +21,21 @@ const Parcela = () => {
           Información de la Parcela {parcela.id}
         </h1>
         <div className="text-lg text-gray-700 mb-2">
-          Ubicación: {parcela.ubicacion}
+          <strong>Ubicación</strong>: {parcela.ubicacion}
         </div>
-        <div className="text-lg text-gray-700">
-          Tamaño: {parcela.hectareas} hectáreas
+        <div className="text-lg text-gray-700 mb-2">
+          <strong>Tamaño</strong>: {parcela.hectareas} hectáreas
         </div>
+        <p className="text-lg text-gray-700 mb-2">
+          <strong>Límites</strong>
+        </p>
+        {parcela.limites.map(({ x, y }, i) => {
+          return (
+            <div key={i} className="text-lg text-gray-700 mb-2">
+              Punto {i}: ({x}, {y})
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import Terreno from "./components/Terreno";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Parcela from "./components/Parcela";
+import RegistroTerrenos from "./components/RegistroTerrenos";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/terrenos/:id" element={<Terreno />} />
           <Route path="/terrenos/baja" element={<BajaTerrenos />} />
           <Route path="/terrenos/modificar" element={<ModificarTerreno />} />
+          <Route path="/terrenos/registro" element={<RegistroTerrenos />} />
           <Route path="/parcelas/:id" element={<Parcela />} />
           <Route path="/parcelas/registro" element={<RegistroParcelas />} />
           <Route path="/parcelas/baja" element={<BajaParcelas />} />

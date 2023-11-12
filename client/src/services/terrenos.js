@@ -17,6 +17,11 @@ const eliminate = async (bajaTerreno) => {
   return response.data;
 };
 
+const create = async (newTerreno) => {
+  const response = await axios.post(baseUrl, newTerreno);
+  return response.data;
+};
+
 const modify = async (modifyTerreno) => {
   const response = await axios.put(
     `${baseUrl}/${modifyTerreno.terreno_id}`,
@@ -24,5 +29,4 @@ const modify = async (modifyTerreno) => {
   );
   return response.data;
 };
-// Añadir create
-export default { getAll, getById, eliminate, modify };
+export default { getAll, getById, eliminate, create, modify };

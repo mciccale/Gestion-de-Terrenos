@@ -7,7 +7,7 @@ const Menu = () => {
 
   return (
     <>
-      <Navbar className="mx-auto max-w-screen-xl px-6 py-3 mb-4">
+      <Navbar className="mx-auto max-w-screen-xxl px-6 py-3 mb-4">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Link style={padding} to="/">
             <Button variant="text">
@@ -17,6 +17,11 @@ const Menu = () => {
           <Link style={padding} to="/terrenos">
             <Button variant="text">
               <Estilo texto="Listado Terrenos"></Estilo>
+            </Button>
+          </Link>
+          <Link style={padding} to="/terrenos/registro">
+            <Button variant="text">
+              <Estilo texto="Registro Terrenos"></Estilo>
             </Button>
           </Link>
           <Link style={padding} to="/parcelas/registro">
