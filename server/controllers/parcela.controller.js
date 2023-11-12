@@ -32,8 +32,13 @@ class ParcelaController {
   };
   deleteParcela = async (req, res) => {
     try {
-      const Parcelas = await this.parcelaModel.deleteParcela(req.params.id);
-      res.status(200).send(Parcelas);
+      const parcela = await this.parcelaModel.deleteParcela(req.params.id);
+      console.log(parcela)
+      if (parcela.length===0) {
+        res.status(404).send({ error: "Not found" })
+      } else {
+        res.status(204).send();
+      }
     } catch (error) {
       console.log(error);
       res.status(500).json({ error });

@@ -10,15 +10,15 @@ const BajaParcelas = () => {
   const handleBajaParcela = async (event) => {
     event.preventDefault();
     try {
-      const bajaParcela = await parcelas.eliminate({ parcela_id });
-      if (bajaParcela.length === 0) {
+      await parcelas.eliminate({ parcela_id });
+      toast.success(<>Parcela eliminada con éxito.</>);
+    } catch (exception) {
+      if (exception.response.status === 404) {
         toast.error("Parcela no encontrada");
       } else {
-        toast.success(<>Parcela eliminada con éxito.</>);
+        toast.error("Ha ocurrido un error en el servidor");
+        console.log("Ha ocurrido un error en el servidor");
       }
-    } catch (exception) {
-      toast.error("Parcela no encontrada");
-      console.log("Parcela no encontrada");
     }
   };
 

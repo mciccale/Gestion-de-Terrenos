@@ -6,7 +6,7 @@ const { SQLParcelaModel } = require("../models/psql/parcela.model");
 const { SQLTerrainModel } = require("../models/psql/terrain.model");
 
 let newTerrain;
-
+let newParcela;
 beforeEach(async () => {
   await SQLParcelaModel.clearParcelas();
   await SQLTerrainModel.clearTerrains();
@@ -22,7 +22,7 @@ beforeEach(async () => {
     ],
   });
 
-  await SQLParcelaModel.addParcela({
+  newParcela = await SQLParcelaModel.addParcela({
     terreno_id: newTerrain.id,
     ubicacion: "Móstoles",
     hectareas: 10,
@@ -54,10 +54,10 @@ describe("Registrar Parcelas", () => {
       .expect("Content-Type", /application\/json/);
 
     expect(response.body.id).toBeDefined();
-    /*const get = await api.get('/parcelas/' + response.body.id)
-            .expect(200)
-            .expect('Content-Type', /application\/json/)
-        expect(response.body.id).toBeEqual(response.body.id)*/
+    const get = await api.get('/parcelas/' + response.body.id)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+    expect(get.body.id).toEqual(response.body.id)
   });
 
   test("Terreno inexistente", async () => {
@@ -90,5 +90,13 @@ describe("Registrar Parcelas", () => {
         limites: [[10], [10, 10], [10, 10], [10, 10]],
       })
       .expect(400);
+  });
+});
+describe("Baja Parcela", () => {
+  test("Parcela Existente", async () => {
+    await api.delete("/parcelas/" + newParcela.id).expect(204);
+  });
+  test("Parcela inexistente", async () => {
+    await api.delete("/parcelas/" + 4).expect(404);
   });
 });
