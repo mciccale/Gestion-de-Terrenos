@@ -144,6 +144,3 @@ describe("Modificar terrenos", () => {
     expect(modifiedTerrain.ubicacion).toBe("Barcelona");
   });
 });
-
-
-

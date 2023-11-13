@@ -12,10 +12,21 @@ class SQLTerrainModel {
   }
   static async getTerrainById({ terrainId }) {
     try {
-      const query = "SELECT * FROM terrenos WHERE id = $1";
+      const query = "SELECT * FROM terrenos WHERE id=$1";
       const params = [terrainId];
-      const { rows } = await db.query(query, params);
-      return rows[0];
+      const res = await db.query(query, params);
+      const result = res.rows[0];
+      if (result.tipo_terreno === "finca") {
+        const query = "SELECT * FROM fincas WHERE terreno_id=$1";
+        const params = [terrainId];
+        const { rows } = await db.query(query, params);
+        return {...result, ...rows[0] };
+      } else {
+        const query = "SELECT * FROM latifundios WHERE terreno_id=$1";
+        const params = [terrainId];
+        const { rows } = await db.query(query, params);
+        return {...result, parcelas: rows.map((row) => row.parcela_id)};
+      }
     } catch (error) {
       console.error(error);
     }

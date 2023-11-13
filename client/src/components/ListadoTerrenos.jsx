@@ -36,6 +36,15 @@ const ListadoTerrenos = () => {
                       color="blue-gray"
                       className="font-normal leading-none opacity-70"
                     >
+                      Tipo de Terreno
+                    </Typography>
+                  </th>
+                  <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal leading-none opacity-70"
+                    >
                       Ubicación
                     </Typography>
                   </th>
@@ -79,6 +88,15 @@ const ListadoTerrenos = () => {
                           className="font-normal"
                         >
                           {terrain.id}
+                        </Typography>
+                      </td>
+                      <td>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal"
+                        >
+                          {terrain.tipo_terreno}
                         </Typography>
                       </td>
                       <td>
