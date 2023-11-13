@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS terrenos (
     id SERIAL PRIMARY KEY,
     ubicacion VARCHAR(255) NOT NULL,
     hectareas FLOAT NOT NULL,
-    limites POINT[4],
+    limites POINT[4] NOT NULL,
     UNIQUE (id)
 );
 -- Creamos la tabla arrendatarios
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS fincas (
     dni_arrendatario VARCHAR(20),
     FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE,
     FOREIGN KEY (dni_arrendatario) REFERENCES arrendatarios(dni) ON DELETE SET NULL,
-    CHECK (tipo_finca IN ('avícola', 'ganadera'))
+    CHECK (tipo_finca IN ('avicola', 'ganadera'))
 );
 -- Creamos la tabla parcelas
 CREATE TABLE IF NOT EXISTS parcelas (
@@ -43,17 +43,18 @@ CREATE TABLE IF NOT EXISTS parcelas (
     periodo_arrendamiento INT,
     importe_alquiler FLOAT,
     dni_arrendatario VARCHAR(20),
-    ubicacion VARCHAR(255),
-    hectareas FLOAT,
-    limites POINT[4],
+    ubicacion VARCHAR(255) NOT NULL,
+    hectareas FLOAT NOT NULL,
+    limites POINT[4] NOT NULL,
     UNIQUE (id),
     FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE,
     FOREIGN KEY (dni_arrendatario) REFERENCES arrendatarios(dni) ON DELETE SET NULL
 );
 -- Creamos la tabla latifundios
 CREATE TABLE IF NOT EXISTS latifundios (
-    terreno_id INT PRIMARY KEY,
+    terreno_id INT,
     parcela_id INT,
+    PRIMARY KEY (terreno_id, parcela_id),
     FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE,
     FOREIGN KEY (parcela_id) REFERENCES parcelas(id) ON DELETE CASCADE
 );

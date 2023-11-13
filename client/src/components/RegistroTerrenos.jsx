@@ -3,7 +3,7 @@ import FormInput from "./FormInput";
 import FormInputPoint from "./FormInputPoint";
 import { useState } from "react";
 import terrenos from "../services/terrenos";
-import { Card, Button, Typography, Input } from "@material-tailwind/react";
+import { Card, Button, Typography, Input, Select, Option } from "@material-tailwind/react";
 
 const RegistroTerrenos = () => {
   const [ubicacion, setUbicacion] = useState("");
@@ -14,10 +14,14 @@ const RegistroTerrenos = () => {
     [0, 0],
     [0, 0],
   ]);
+  const [tipoTerreno, setTipoTerreno] = useState("")
+  const [tipoFinca, setTipoFinca] = useState("")
   const handleNewTerreno = async (event) => {
     event.preventDefault();
     try {
       const newTerreno = await terrenos.create({
+        tipoFinca,
+        tipoTerreno,
         ubicacion,
         hectareas,
         limites,
@@ -40,6 +44,8 @@ const RegistroTerrenos = () => {
       [0, 0],
       [0, 0],
     ]);
+    setTipoTerreno("");
+    setFinca("");
   };
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
@@ -50,6 +56,23 @@ const RegistroTerrenos = () => {
         >
           <div className="flex flex-wrap -mx-3 -mb-3">
             <div className="mb-1 flex flex-col gap-6">
+              <Typography variant="h6" color="blue-gray">
+                Tipo de Terreno
+              </Typography>
+              <Select label="Tipo de Terreno" onChange={(element) => { console.log(element); setTipoTerreno(element) }}>
+                <Option value="Latifundio">Latifundio</Option>
+                <Option value="Finca">Finca</Option>
+              </Select>
+              {tipoTerreno == "Finca" ? <div>
+                <Typography variant="h6" color="blue-gray">
+                  Tipo de Finca
+                </Typography>
+                <Select label="Tipo de Finca" onChange={(element) => setTipoFinca(element)}>
+                  <Option value="avicola">Avícola</Option>
+                  <Option value="ganadera">Ganadera</Option>
+                </Select>
+              </div> : <></>
+              }
               <FormInput
                 entry={ubicacion}
                 setEntry={setUbicacion}

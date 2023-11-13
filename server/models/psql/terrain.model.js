@@ -30,12 +30,12 @@ class SQLTerrainModel {
       console.error(error);
     }
   }
-  static async addTerrain({ ubicacion, hectareas, limites }) {
+  static async addTerrain({tipoFinca,tipoTerreno, ubicacion, hectareas, limites }) {
     try {
       console.log(limites[0]);
-      const query =
+      let query =
         "INSERT INTO terrenos(ubicacion, hectareas, limites) VALUES ($1,$2,ARRAY[POINT($3,$4),POINT($5,$6),POINT($7,$8),POINT($9,$10)]) RETURNING *";
-      const params = [
+      let params = [
         ubicacion,
         hectareas,
         limites[0][0],
@@ -48,7 +48,25 @@ class SQLTerrainModel {
         limites[3][1],
       ];
       const { rows } = await db.query(query, params);
-      console.log(rows);
+      if(tipoTerreno.localeCompare("Latifundio")===0){
+        query = "INSERT INTO latifundios(terreno_id, parcela_id) VALUES ($1,$2)";
+        params = [
+          rows[0].id,
+          0
+        ];
+      } else {
+        query = "INSERT INTO fincas(terreno_id, tipo_finca, alquilada, fecha_inicio_alquiler, periodo_arrendamiento, importe_alquiler, dni_arrendatario) VALUES ($1,$2,$3,$4,$5,$6,$7)";
+        params = [
+          rows[0].id,
+          tipoFinca,
+          false,
+          null,
+          null,
+          null,
+          null
+        ];
+      }
+      await db.query(query, params);
       return rows[0];
     } catch (error) {
       console.log(error);
