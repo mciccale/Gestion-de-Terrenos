@@ -86,10 +86,7 @@ const ModificarTerreno = () => {
                   name={`hectareas`}
                   onChange={({ target }) => setHectareas(target.value)}
                 />
-                <FormInputPoint
-                  coordenadas={limites}
-                  setCoordenadas={setLimites}
-                />
+                <FormInputPoint limites={limites} setLimites={setLimites} />
                 <div className="flex items-center w-max gap-4">
                   <Button type="submit" className="mt-6">
                     Create

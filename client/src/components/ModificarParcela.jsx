@@ -9,7 +9,7 @@ const ModificarParcela = () => {
   const [parcela_id, setParcela_id] = useState(0);
   const [ubicacion, setUbicacion] = useState("");
   const [hectareas, setHectareas] = useState(0);
-  const [coordenadas, setCoordenadas] = useState([
+  const [limites, setLimites] = useState([
     [0, 0],
     [0, 0],
     [0, 0],
@@ -23,7 +23,7 @@ const ModificarParcela = () => {
         parcela_id,
         ubicacion,
         hectareas,
-        coordenadas,
+        limites,
       });
       console.log(modparcela);
       if (modparcela.length === 0) {
@@ -42,7 +42,7 @@ const ModificarParcela = () => {
     setParcela_id(0);
     setUbicacion("");
     setHectareas(0);
-    setCoordenadas([
+    setLimites([
       [0, 0],
       [0, 0],
       [0, 0],
@@ -87,10 +87,7 @@ const ModificarParcela = () => {
                   name={`hectareas`}
                   onChange={({ target }) => setHectareas(target.value)}
                 />
-                <FormInputPoint
-                  coordenadas={coordenadas}
-                  setCoordenadas={setCoordenadas}
-                />
+                <FormInputPoint limites={limites} setLimites={setLimites} />
                 <div className="flex items-center w-max gap-4">
                   <Button type="submit" className="mt-6">
                     Create
