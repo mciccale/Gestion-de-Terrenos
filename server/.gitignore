@@ -2,3 +2,5 @@ node_modules
 .vscode/*
 !.vscode/extensions.json
 .DS_Store
+.env
+api.http
