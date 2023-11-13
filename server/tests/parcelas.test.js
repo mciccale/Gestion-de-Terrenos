@@ -12,6 +12,7 @@ beforeEach(async () => {
   await SQLTerrainModel.clearTerrains();
 
   newTerrain = await SQLTerrainModel.addTerrain({
+    tipoTerreno: "latifundio",
     ubicacion: "Madrid",
     hectareas: 100,
     limites: [
@@ -95,7 +96,7 @@ describe("Registrar Parcelas", () => {
 });
 describe("Baja Parcela", () => {
   test("Parcela Existente", async () => {
-    await api.delete("/parcelas/" + newParcela.id).expect(204);
+    await api.delete("/parcelas/" + newParcela.id).expect(200);
   });
   test("Parcela inexistente", async () => {
     await api.delete("/parcelas/" + 4).expect(404);

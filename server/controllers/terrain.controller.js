@@ -17,13 +17,13 @@ class TerrainController {
   };
   getTerrainById = async (req, res) => {
     try {
-      const terrain = await this.terrainModel.getTerrainById({
-        terrainId: parseInt(req.params.id),
+      const terreno = await this.terrainModel.getTerrainById({
+        terrainId: Number(req.params.id),
       });
-      if (!terrain) {
+      if (!terreno) {
         res.status(404).send({ error: "Not found" });
       } else {
-        res.status(200).send(terrain);
+        res.status(200).send(terreno);
       }
     } catch (error) {
       console.error(error);
@@ -32,8 +32,12 @@ class TerrainController {
   };
   deleteTerreno = async (req, res) => {
     try {
-      const Terrenos = await this.terrainModel.deleteTerreno(req.params.id);
-      res.status(200).send(Terrenos);
+      const terreno = await this.terrainModel.deleteTerreno(req.params.id);
+      if (!terreno) {
+        res.status(404).send({ error: "Not found" });
+      } else {
+        res.status(200).send(terreno);
+      }
     } catch (error) {
       console.log(error);
       res.status(500).json({ error });
@@ -54,11 +58,11 @@ class TerrainController {
   };
   addTerrain = async (req, res) => {
     try {
-      const Terrenos = await this.terrainModel.addTerrain(req.body);
-      if (!Terrenos) {
-        res.status(404).send({ error: "Not found" });
+      const terreno = await this.terrainModel.addTerrain(req.body);
+      if (!terreno) {
+        res.status(400).send({ error: "Bad Request" });
       } else {
-        res.status(200).send(Terrenos);
+        res.status(201).send(terreno);
       }
     } catch (error) {
       console.log(error);

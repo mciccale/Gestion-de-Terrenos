@@ -15,6 +15,7 @@ describe("Registrar terreno", () => {
     const response = await api
       .post("/terrenos")
       .send({
+        tipoTerreno: "latifundio",
         ubicacion: "Almudena Grande",
         hectareas: 5,
         limites: [
@@ -24,7 +25,7 @@ describe("Registrar terreno", () => {
           [2, 2],
         ],
       })
-      .expect(200)
+      .expect(201)
       .expect("Content-Type", /application\/json/);
 
     expect(response.body.id).toBeDefined();
@@ -35,6 +36,7 @@ describe("Borrar Terreno", () => {
   test("existente", async () => {
     // Añadimos un terreno
     const newTerrain = await SQLTerrainModel.addTerrain({
+      tipoTerreno: "latifundio",
       ubicacion: "Madrid",
       hectareas: 100,
       limites: [
@@ -44,7 +46,6 @@ describe("Borrar Terreno", () => {
         [10, 10],
       ],
     });
-
 
     // Lo borramos y vemos si ha ido bien la operación
     const response = await api
@@ -63,6 +64,7 @@ describe("Obtener terrenos", () => {
     await api
       .post("/terrenos")
       .send({
+        tipoTerreno: "finca",
         ubicacion: "Almudena Grande",
         hectareas: 5,
         limites: [
@@ -76,6 +78,7 @@ describe("Obtener terrenos", () => {
       await api
       .post("/terrenos")
       .send({
+        tipoTerreno: "latifundio",
         ubicacion: "Barcelona",
         hectareas: 100,
         limites: [
@@ -101,6 +104,7 @@ describe("Modificar terrenos", () => {
   test("lista de terrenos existentes", async () => {
     
     const newTerrain = await SQLTerrainModel.addTerrain({
+      tipoTerreno: "latifundio",
       ubicacion: "Madrid",
       hectareas: 100,
       limites: [
@@ -116,7 +120,7 @@ describe("Modificar terrenos", () => {
     expect(newTerrain.ubicacion).toBe("Madrid");
 
     const updatedTerrain = await SQLTerrainModel.modifyTerrain({
-      terreno_id: newTerrain.id,
+      terrenoId: newTerrain.id,
       ubicacion: "Barcelona",
       hectareas: 150,
       limites: [

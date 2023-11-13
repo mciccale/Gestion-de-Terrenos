@@ -20,22 +20,23 @@ class SQLTerrainModel {
       console.error(error);
     }
   }
-  static async deleteTerreno(terreno_id) {
+  static async deleteTerreno(terrenoId) {
     try {
       const query = "DELETE FROM terrenos WHERE id=$1 RETURNING *";
-      const params = [terreno_id];
+      const params = [terrenoId];
       const { rows } = await db.query(query, params);
       return rows;
     } catch (error) {
       console.error(error);
     }
   }
-  static async addTerrain({tipoFinca,tipoTerreno, ubicacion, hectareas, limites }) {
+  static async addTerrain({ tipoFinca, tipoTerreno, ubicacion, hectareas, limites }) {
     try {
       console.log(limites[0]);
       let query =
-        "INSERT INTO terrenos(ubicacion, hectareas, limites) VALUES ($1,$2,ARRAY[POINT($3,$4),POINT($5,$6),POINT($7,$8),POINT($9,$10)]) RETURNING *";
+        "INSERT INTO terrenos(tipo_terreno, ubicacion, hectareas, limites) VALUES ($1,$2,$3,ARRAY[POINT($4,$5),POINT($6,$7),POINT($8,$9),POINT($10,$11)]) RETURNING *";
       let params = [
+        tipoTerreno,
         ubicacion,
         hectareas,
         limites[0][0],
@@ -48,13 +49,7 @@ class SQLTerrainModel {
         limites[3][1],
       ];
       const { rows } = await db.query(query, params);
-      if(tipoTerreno.localeCompare("Latifundio")===0){
-        query = "INSERT INTO latifundios(terreno_id, parcela_id) VALUES ($1,$2)";
-        params = [
-          rows[0].id,
-          0
-        ];
-      } else {
+      if (tipoTerreno == "finca") {
         query = "INSERT INTO fincas(terreno_id, tipo_finca, alquilada, fecha_inicio_alquiler, periodo_arrendamiento, importe_alquiler, dni_arrendatario) VALUES ($1,$2,$3,$4,$5,$6,$7)";
         params = [
           rows[0].id,
@@ -72,12 +67,12 @@ class SQLTerrainModel {
       console.log(error);
     }
   }
-  static async modifyTerrain({ terreno_id, ubicacion, hectareas, limites }) {
+  static async modifyTerrain({ terrenoId, ubicacion, hectareas, limites }) {
     try {
       const query =
         "UPDATE terrenos SET ubicacion=$2,hectareas=$3,limites=ARRAY[POINT($4,$5),POINT($6,$7),POINT($8,$9),POINT($10,$11)] where id=$1 RETURNING *";
       const params = [
-        terreno_id,
+        terrenoId,
         ubicacion,
         hectareas,
         limites[0][0],

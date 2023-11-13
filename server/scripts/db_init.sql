@@ -6,10 +6,12 @@ WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'gestion_terrenos_db')
 -- Creamos la tabla terrenos
 CREATE TABLE IF NOT EXISTS terrenos (
     id SERIAL PRIMARY KEY,
+    tipo_terreno VARCHAR(25)  NOT NULL,
     ubicacion VARCHAR(255) NOT NULL,
     hectareas FLOAT NOT NULL,
     limites POINT[4] NOT NULL,
-    UNIQUE (id)
+    UNIQUE (id),
+    CHECK (tipo_terreno IN ('finca', 'latifundio'))
 );
 -- Creamos la tabla arrendatarios
 CREATE TABLE IF NOT EXISTS arrendatarios (
@@ -73,14 +75,13 @@ CREATE TABLE IF NOT EXISTS recibos (
     FOREIGN KEY (finca_id) REFERENCES terrenos(id),
     FOREIGN KEY (parcela_id) REFERENCES parcelas(id)
 );
-INSERT INTO terrenos VALUES(0,'', 0, ARRAY[]::POINT[]);
-INSERT INTO parcelas VALUES(0,0,false,NULL,NULL,NULL,NULL,'', 0, ARRAY[]::POINT[]);
-INSERT INTO terrenos(ubicacion, hectareas, limites) VALUES('Comunidad de Madrid', 100, ARRAY[POINT(0,0),POINT(0,10),POINT(10,0),POINT(10,10)]);
+
+INSERT INTO terrenos(tipo_terreno, ubicacion, hectareas, limites) VALUES('latifundio','Comunidad de Madrid', 100, ARRAY[POINT(0,0),POINT(0,10),POINT(10,0),POINT(10,10)]);
 INSERT INTO parcelas(terreno_id, alquilada, fecha_inicio_alquiler, periodo_arrendamiento, importe_alquiler, dni_arrendatario, ubicacion, hectareas, limites) VALUES(1,false,NULL,NULL,NULL,NULL,'Mostoles', 10, ARRAY[POINT(1,1),POINT(1,1),POINT(1,1),POINT(1,1)]);
 INSERT INTO parcelas(terreno_id, alquilada, fecha_inicio_alquiler, periodo_arrendamiento, importe_alquiler, dni_arrendatario, ubicacion, hectareas, limites) VALUES(1,false,NULL,NULL,NULL,NULL,'Navalcarnero', 10, ARRAY[POINT(2,2),POINT(2,2),POINT(2,2),POINT(2,2)]);
 INSERT INTO latifundios(terreno_id, parcela_id) VALUES (1, 1);
 INSERT INTO latifundios(terreno_id, parcela_id) VALUES (1, 2);
-INSERT INTO terrenos(ubicacion, hectareas, limites) VALUES('Castilla La Mancha', 1000, ARRAY[POINT(-10,-10),POINT(3.55,3.41),POINT(400,-15),POINT(15.22,42.1)]);
+INSERT INTO terrenos(tipo_terreno, ubicacion, hectareas, limites) VALUES('finca', 'Castilla La Mancha', 1000, ARRAY[POINT(-10,-10),POINT(3.55,3.41),POINT(400,-15),POINT(15.22,42.1)]);
 INSERT INTO fincas(terreno_id, tipo_finca, alquilada, fecha_inicio_alquiler, periodo_arrendamiento, importe_alquiler, dni_arrendatario) VALUES (2, 'ganadera', false, NULL, NULL, NULL, NULL);
-INSERT INTO terrenos(ubicacion, hectareas, limites) VALUES('Castilla La Mancha', 500, ARRAY[POINT(-3,-40),POINT(3.55,3.41),POINT(2.55,-5),POINT(15.22,42.1)]);
+INSERT INTO terrenos(tipo_terreno, ubicacion, hectareas, limites) VALUES('finca','Castilla La Mancha', 500, ARRAY[POINT(-3,-40),POINT(3.55,3.41),POINT(2.55,-5),POINT(15.22,42.1)]);
 INSERT INTO fincas(terreno_id, tipo_finca, alquilada, fecha_inicio_alquiler, periodo_arrendamiento, importe_alquiler, dni_arrendatario) VALUES (3, 'avicola', false, NULL, NULL, NULL, NULL);

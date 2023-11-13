@@ -5,7 +5,7 @@ class ParcelaController {
   getParcelaById = async (req, res) => {
     try {
       const parcela = await this.parcelaModel.getParcelaById({
-        parcelaId: parseInt(req.params.id),
+        parcelaId: Number(req.params.id),
       });
       if (!parcela) {
         res.status(404).send({ error: "Not found" });
@@ -33,11 +33,10 @@ class ParcelaController {
   deleteParcela = async (req, res) => {
     try {
       const parcela = await this.parcelaModel.deleteParcela(req.params.id);
-      console.log(parcela)
-      if (parcela.length===0) {
+      if (parcela.length === 0) {
         res.status(404).send({ error: "Not found" })
       } else {
-        res.status(204).send();
+        res.status(200).send(parcela[0]);
       }
     } catch (error) {
       console.log(error);
@@ -50,7 +49,7 @@ class ParcelaController {
       if (!parcela) {
         res.status(404).send({ error: "Not found" });
       } else {
-        res.status(200).send(parcela);
+        res.status(200).send(parcela[0]);
       }
     } catch (error) {
       console.log(error);

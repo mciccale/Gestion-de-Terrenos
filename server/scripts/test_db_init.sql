@@ -6,10 +6,12 @@ WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'test_gestion_terrenos
 -- Creamos la tabla terrenos
 CREATE TABLE IF NOT EXISTS terrenos (
     id SERIAL PRIMARY KEY,
+    tipo_terreno VARCHAR(25)  NOT NULL,
     ubicacion VARCHAR(255) NOT NULL,
     hectareas FLOAT NOT NULL,
     limites POINT[4] NOT NULL,
-    UNIQUE (id)
+    UNIQUE (id),
+    CHECK (tipo_terreno IN ('finca', 'latifundio'))
 );
 -- Creamos la tabla arrendatarios
 CREATE TABLE IF NOT EXISTS arrendatarios (

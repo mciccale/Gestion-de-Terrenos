@@ -60,10 +60,10 @@ const RegistroTerrenos = () => {
                 Tipo de Terreno
               </Typography>
               <Select label="Tipo de Terreno" onChange={(element) => { console.log(element); setTipoTerreno(element) }}>
-                <Option value="Latifundio">Latifundio</Option>
-                <Option value="Finca">Finca</Option>
+                <Option value="latifundio">latifundio</Option>
+                <Option value="finca">finca</Option>
               </Select>
-              {tipoTerreno == "Finca" ? <div>
+              {tipoTerreno == "finca" ? <div>
                 <Typography variant="h6" color="blue-gray">
                   Tipo de Finca
                 </Typography>
