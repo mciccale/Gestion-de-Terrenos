@@ -49,6 +49,11 @@ const Menu = () => {
               <Estilo texto="Baja Terreno"></Estilo>
             </Button>
           </Link>
+          <Link style={padding} to="/alquileres/baja">
+            <Button variant="text">
+              <Estilo texto="Baja Alquiler"></Estilo>
+            </Button>
+          </Link>
         </div>
       </Navbar>
     </>
