@@ -5,6 +5,7 @@ const { mountRoutes } = require("./routes/index.routes.js");
 const { LocalTerrainModel } = require("./models/local/terrain.model.js");
 const { SQLTerrainModel } = require("./models/psql/terrain.model.js");
 const { SQLParcelaModel } = require("./models/psql/parcela.model.js");
+const { SQLAlquilerModel } = require("./models/psql/alquiler.model.js");
 const middleware = require("./middlewares/middleware.js");
 const app = express();
 
@@ -23,6 +24,7 @@ app.disable("x-powered-by");
 const models = {
   terrain: SQLTerrainModel,
   parcela: SQLParcelaModel,
+  alquiler: SQLAlquilerModel
 };
 mountRoutes({ app, models });
 
