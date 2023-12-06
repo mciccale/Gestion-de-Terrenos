@@ -33,7 +33,7 @@ class SQLTerrainModel {
   }
   static async deleteTerreno(terrenoId) {
     try {
-      const query = "DELETE FROM terrenos WHERE id=$1 RETURNING *";
+      const query = "DELETE FROM terrenos WHERE id=$1 AND (tipo_terreno='finca' OR tipo_terreno='latifundio') RETURNING *";
       const params = [terrenoId];
       const { rows } = await db.query(query, params);
       return rows;
@@ -61,14 +61,11 @@ class SQLTerrainModel {
       ];
       const { rows } = await db.query(query, params);
       if (tipoTerreno == "finca") {
-        query = "INSERT INTO fincas(terreno_id, tipo_finca, alquilada, fecha_inicio_alquiler, periodo_arrendamiento, importe_alquiler, dni_arrendatario) VALUES ($1,$2,$3,$4,$5,$6,$7)";
+        query = "INSERT INTO fincas(terreno_id, tipo_finca, alquilada, alquiler_id) VALUES ($1,$2,$3,$4)";
         params = [
           rows[0].id,
           tipoFinca,
           false,
-          null,
-          null,
-          null,
           null
         ];
       }
@@ -81,7 +78,7 @@ class SQLTerrainModel {
   static async modifyTerrain({ terrenoId, ubicacion, hectareas, limites }) {
     try {
       const query =
-        "UPDATE terrenos SET ubicacion=$2,hectareas=$3,limites=ARRAY[POINT($4,$5),POINT($6,$7),POINT($8,$9),POINT($10,$11)] where id=$1 RETURNING *";
+        "UPDATE terrenos SET ubicacion=$2,hectareas=$3,limites=ARRAY[POINT($4,$5),POINT($6,$7),POINT($8,$9),POINT($10,$11)] where id=$1 AND (tipo_terreno='finca' OR tipo_terreno='latifundio') RETURNING *";
       const params = [
         terrenoId,
         ubicacion,

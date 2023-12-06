@@ -25,7 +25,7 @@ const RegistroParcelas = () => {
         hectareas,
         limites,
       });
-      toast.success(<>Parcela registrada con éxito. Su id es {response.id}</>);
+      toast.success(<>Parcela registrada con éxito. Su id es {response.terreno_id}</>);
     } catch (exception) {
       console.log(exception.response);
 

@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS terrenos (
     hectareas FLOAT NOT NULL,
     limites POINT[4] NOT NULL,
     UNIQUE (id),
-    CHECK (tipo_terreno IN ('finca', 'latifundio'))
+    CHECK(tipo_terreno IN ('finca', 'latifundio', 'parcela'))
 );
 -- Creamos la tabla arrendatarios
 CREATE TABLE IF NOT EXISTS arrendatarios (
@@ -23,34 +23,36 @@ CREATE TABLE IF NOT EXISTS arrendatarios (
     parcelas_alquiladas INT[],
     UNIQUE (dni)
 );
--- Creamos la tabla fincas
-CREATE TABLE IF NOT EXISTS fincas (
-    terreno_id INT PRIMARY KEY,
-    tipo_finca VARCHAR(25)  NOT NULL,
-    alquilada BOOLEAN NOT NULL,
+--Creamos la tabla alquileres
+CREATE TABLE IF NOT EXISTS alquileres (
+    id SERIAL PRIMARY KEY,
+    terreno_id INT,
     fecha_inicio_alquiler DATE,
     periodo_arrendamiento INT,
     importe_alquiler FLOAT,
     dni_arrendatario VARCHAR(20),
     FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE,
-    FOREIGN KEY (dni_arrendatario) REFERENCES arrendatarios(dni) ON DELETE SET NULL,
+    FOREIGN KEY (dni_arrendatario) REFERENCES arrendatarios(dni) ON DELETE SET NULL
+);
+-- Creamos la tabla fincas
+CREATE TABLE IF NOT EXISTS fincas (
+    terreno_id INT PRIMARY KEY,
+    tipo_finca VARCHAR(25)  NOT NULL,
+    alquilada BOOLEAN NOT NULL,
+    alquiler_id INT,
+    FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE,
+    FOREIGN KEY (alquiler_id) REFERENCES alquileres(id) ON DELETE SET NULL,
     CHECK (tipo_finca IN ('avicola', 'ganadera'))
 );
+
 -- Creamos la tabla parcelas
 CREATE TABLE IF NOT EXISTS parcelas (
-    id SERIAL PRIMARY KEY,
-    terreno_id INT,
+    terreno_id INT PRIMARY KEY,
+    latifundio_id INT,
     alquilada BOOLEAN,
-    fecha_inicio_alquiler DATE,
-    periodo_arrendamiento INT,
-    importe_alquiler FLOAT,
-    dni_arrendatario VARCHAR(20),
-    ubicacion VARCHAR(255) NOT NULL,
-    hectareas FLOAT NOT NULL,
-    limites POINT[4] NOT NULL,
-    UNIQUE (id),
-    FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE, --REVISAR, podría ser de latifundio
-    FOREIGN KEY (dni_arrendatario) REFERENCES arrendatarios(dni) ON DELETE SET NULL
+    alquiler_id INT,
+    FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE,
+    FOREIGN KEY (alquiler_id) REFERENCES alquileres(id) ON DELETE SET NULL
 );
 -- Creamos la tabla latifundios
 CREATE TABLE IF NOT EXISTS latifundios (
@@ -58,9 +60,10 @@ CREATE TABLE IF NOT EXISTS latifundios (
     parcela_id INT,
     PRIMARY KEY (terreno_id, parcela_id),
     FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE,
-    FOREIGN KEY (parcela_id) REFERENCES parcelas(id) ON DELETE CASCADE
+    FOREIGN KEY (parcela_id) REFERENCES parcelas(terreno_id) ON DELETE CASCADE
 );
--- Creamos la tabla recibos
+
+/*-- Creamos la tabla recibos
 CREATE TABLE IF NOT EXISTS recibos (
     id SERIAL PRIMARY KEY,
     finca_id INT,
@@ -73,15 +76,19 @@ CREATE TABLE IF NOT EXISTS recibos (
     pagado BOOLEAN,
     UNIQUE (id),
     FOREIGN KEY (finca_id) REFERENCES terrenos(id),
-    FOREIGN KEY (parcela_id) REFERENCES parcelas(id)
-);
+    FOREIGN KEY (parcela_id) REFERENCES parcelas(terreno_id)
+);*/
 
 INSERT INTO terrenos(tipo_terreno, ubicacion, hectareas, limites) VALUES('latifundio','Comunidad de Madrid', 100, ARRAY[POINT(0,0),POINT(0,10),POINT(10,0),POINT(10,10)]);
-INSERT INTO parcelas(terreno_id, alquilada, fecha_inicio_alquiler, periodo_arrendamiento, importe_alquiler, dni_arrendatario, ubicacion, hectareas, limites) VALUES(1,false,NULL,NULL,NULL,NULL,'Mostoles', 10, ARRAY[POINT(1,1),POINT(1,1),POINT(1,1),POINT(1,1)]);
-INSERT INTO parcelas(terreno_id, alquilada, fecha_inicio_alquiler, periodo_arrendamiento, importe_alquiler, dni_arrendatario, ubicacion, hectareas, limites) VALUES(1,false,NULL,NULL,NULL,NULL,'Navalcarnero', 10, ARRAY[POINT(2,2),POINT(2,2),POINT(2,2),POINT(2,2)]);
-INSERT INTO latifundios(terreno_id, parcela_id) VALUES (1, 1);
+INSERT INTO terrenos(tipo_terreno, ubicacion, hectareas, limites) VALUES('parcela','Mostoles', 10, ARRAY[POINT(1,1),POINT(1,1),POINT(1,1),POINT(1,1)]);
+INSERT INTO terrenos(tipo_terreno, ubicacion, hectareas, limites) VALUES('parcela','Navalcarnero', 10, ARRAY[POINT(2,2),POINT(2,2),POINT(2,2),POINT(2,2)]);
+INSERT INTO parcelas(terreno_id, latifundio_id, alquilada, alquiler_id) VALUES(2,1,false, NULL);
+INSERT INTO parcelas(terreno_id, latifundio_id, alquilada, alquiler_id) VALUES(3,1,false, NULL);
 INSERT INTO latifundios(terreno_id, parcela_id) VALUES (1, 2);
+INSERT INTO latifundios(terreno_id, parcela_id) VALUES (1, 3);
 INSERT INTO terrenos(tipo_terreno, ubicacion, hectareas, limites) VALUES('finca', 'Castilla La Mancha', 1000, ARRAY[POINT(-10,-10),POINT(3.55,3.41),POINT(400,-15),POINT(15.22,42.1)]);
-INSERT INTO fincas(terreno_id, tipo_finca, alquilada, fecha_inicio_alquiler, periodo_arrendamiento, importe_alquiler, dni_arrendatario) VALUES (2, 'ganadera', false, NULL, NULL, NULL, NULL);
+INSERT INTO fincas(terreno_id, tipo_finca, alquilada, alquiler_id) VALUES (4, 'ganadera', false, NULL);
 INSERT INTO terrenos(tipo_terreno, ubicacion, hectareas, limites) VALUES('finca','Castilla La Mancha', 500, ARRAY[POINT(-3,-40),POINT(3.55,3.41),POINT(2.55,-5),POINT(15.22,42.1)]);
-INSERT INTO fincas(terreno_id, tipo_finca, alquilada, fecha_inicio_alquiler, periodo_arrendamiento, importe_alquiler, dni_arrendatario) VALUES (3, 'avicola', false, NULL, NULL, NULL, NULL);
+INSERT INTO fincas(terreno_id, tipo_finca, alquilada, alquiler_id) VALUES (5, 'avicola', false, NULL);
+INSERT INTO arrendatarios(dni, nombre, edad, sexo, fincas_alquiladas, parcelas_alquiladas) VALUES('12345E', 'Juan Carlos', 54, 'Masculino', [], []);
+INSERT INTO alquileres(terreno_id,fecha_inicio_alquiler,periodo_arrendamiento,importe_alquiler,dni_arrendatario) VALUES(2,'2022-10-5', 12,500.5,'12345E');

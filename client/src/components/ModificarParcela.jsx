@@ -90,7 +90,7 @@ const ModificarParcela = () => {
                 <FormInputPoint limites={limites} setLimites={setLimites} />
                 <div className="flex items-center w-max gap-4">
                   <Button type="submit" className="mt-6">
-                    Create
+                    Modify
                   </Button>
                   <Button className="mt-6" onClick={handleReset}>
                     Reset
