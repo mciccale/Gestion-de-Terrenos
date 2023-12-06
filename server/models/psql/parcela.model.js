@@ -3,7 +3,7 @@ const db = require("../../database/db.js");
 class SQLParcelaModel {
   static async getParcelaById({ parcelaId }) {
     try {
-      const query = "SELECT * FROM parcelas WHERE id = $1";
+      const query = "SELECT * FROM parcelas INNER JOIN terrenos ON terrenos.id=parcelas.terreno_id WHERE terreno_id = $1";
       const params = [parcelaId];
       const { rows } = await db.query(query, params);
       return rows[0];
@@ -13,18 +13,10 @@ class SQLParcelaModel {
   }
   static async addParcela({ terreno_id, ubicacion, hectareas, limites }) {
     try {
-      //falta añadir el terreno_id
-      const query = `INSERT INTO parcelas(terreno_id, alquilada, fecha_inicio_alquiler, periodo_arrendamiento, 
-        importe_alquiler, dni_arrendatario, ubicacion, hectareas, limites)
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,
-        ARRAY[POINT($9,$10),POINT($11,$12),POINT($13,$14),POINT($15,$16)]) RETURNING *`;
-      const params = [
-        terreno_id,
-        false,
-        null,
-        null,
-        null,
-        null,
+      await db.query('BEGIN');
+      let query = "INSERT INTO terrenos(tipo_terreno, ubicacion, hectareas, limites) VALUES ($1,$2,$3,ARRAY[POINT($4,$5),POINT($6,$7),POINT($8,$9),POINT($10,$11)]) RETURNING *";
+      let params = [
+        'parcela',
         ubicacion,
         hectareas,
         limites[0][0],
@@ -36,16 +28,33 @@ class SQLParcelaModel {
         limites[3][0],
         limites[3][1],
       ];
-      const { rows } = await db.query(query, params);
+      let { rows } = await db.query(query, params);
+      query = `INSERT INTO parcelas(terreno_id, latifundio_id, alquilada, alquiler_id) VALUES($1,$2,$3,$4) RETURNING *`;
+      params = [
+        rows[0].id,
+        terreno_id,
+        false,
+        null
+      ];
+      ({ rows } = await db.query(query, params));
+      console.log(rows);
+      query = `INSERT INTO latifundios(terreno_id, parcela_id) VALUES($1,$2)`;
+      params = [
+        terreno_id,
+        rows[0].terreno_id,
+      ];
+      await db.query(query, params);
+      await db.query('COMMIT');
       return rows[0];
     } catch (error) {
+      await db.query('ROLLBACK');
       console.error(error);
       return error;
     }
   }
   static async deleteParcela(parcela_id) {
     try {
-      const query = "DELETE FROM parcelas WHERE id=$1 RETURNING *";
+      const query = "DELETE FROM terrenos WHERE id=$1 AND tipo_terreno='parcela' RETURNING *";
       const params = [parcela_id];
       const { rows } = await db.query(query, params);
       return rows;
@@ -57,7 +66,7 @@ class SQLParcelaModel {
   static async modifyParcela({ parcela_id, ubicacion, hectareas, limites }) {
     try {
       const query =
-        "UPDATE parcelas SET ubicacion=$2,hectareas=$3,limites=ARRAY[POINT($4,$5),POINT($6,$7),POINT($8,$9),POINT($10,$11)] WHERE id=$1 RETURNING *";
+        "UPDATE terrenos SET ubicacion=$2,hectareas=$3,limites=ARRAY[POINT($4,$5),POINT($6,$7),POINT($8,$9),POINT($10,$11)] WHERE id=$1 AND tipo_terreno='parcela' RETURNING *";
       const params = [
         parcela_id,
         ubicacion,
