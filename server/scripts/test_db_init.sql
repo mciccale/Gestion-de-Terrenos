@@ -62,3 +62,5 @@ CREATE TABLE IF NOT EXISTS latifundios (
     FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE,
     FOREIGN KEY (parcela_id) REFERENCES parcelas(terreno_id) ON DELETE CASCADE
 );
+-- Insertamos un arrendatario, ya que en este ciclo no tenemos la implementación de añadir un arrendatario
+INSERT INTO arrendatarios(dni, nombre, edad, sexo, fincas_alquiladas, parcelas_alquiladas) VALUES('12345E', 'Juan Carlos', 54, 'H', '{}', '{}');

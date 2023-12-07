@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import Menu from "./components/Menu";
+import MenuPrin from "./components/Menu";
 import ListadoTerrenos from "./components/ListadoTerrenos";
 import RegistroParcelas from "./components/RegistroParcelas";
 import BajaParcelas from "./components/BajaParcelas";
@@ -19,7 +19,7 @@ function App() {
     <>
       <ToastContainer />
       <Router>
-        <Menu />
+        <MenuPrin />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/terrenos" element={<ListadoTerrenos />} />

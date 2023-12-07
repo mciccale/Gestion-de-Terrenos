@@ -1,6 +1,16 @@
 const db = require("../../database/db.js");
 
 class SQLAlquilerModel {
+    static async addAlquiler({ terreno_id, fecha_inicio_alquiler, periodo_arrendamiento, importe_alquiler, dni_arrendatario }) {
+        try {
+            const query = "INSERT INTO alquileres(terreno_id,fecha_inicio_alquiler,periodo_arrendamiento,importe_alquiler,dni_arrendatario) VALUES($1,$2,$3,$4,$5) RETURNING *";
+            const params = [terreno_id, fecha_inicio_alquiler, periodo_arrendamiento, importe_alquiler, dni_arrendatario];
+            const { rows } = await db.query(query, params);
+            return rows[0];
+        } catch (error) {
+            console.error(error);
+        }
+    }
     static async deleteAlquiler(alquilerId) {
         try {
             let query = "DELETE FROM alquileres WHERE id=$1 RETURNING *";
@@ -21,6 +31,15 @@ class SQLAlquilerModel {
             console.error(error);
         }
     }
+    static async clearAlquileres() {
+        try {
+          const query = "DELETE FROM alquileres";
+          const { rows } = await db.query(query);
+          return rows;
+        } catch (error) {
+          console.error(error);
+        }
+      }
 }
 
 module.exports = { SQLAlquilerModel };
