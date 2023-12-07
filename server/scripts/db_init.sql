@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS alquileres (
     importe_alquiler FLOAT,
     dni_arrendatario VARCHAR(20),
     FOREIGN KEY (terreno_id) REFERENCES terrenos(id) ON DELETE CASCADE,
-    FOREIGN KEY (dni_arrendatario) REFERENCES arrendatarios(dni) ON DELETE SET NULL
+    FOREIGN KEY (dni_arrendatario) REFERENCES arrendatarios(dni) 
 );
 -- Creamos la tabla fincas
 CREATE TABLE IF NOT EXISTS fincas (
@@ -90,5 +90,5 @@ INSERT INTO terrenos(tipo_terreno, ubicacion, hectareas, limites) VALUES('finca'
 INSERT INTO fincas(terreno_id, tipo_finca, alquilada, alquiler_id) VALUES (4, 'ganadera', false, NULL);
 INSERT INTO terrenos(tipo_terreno, ubicacion, hectareas, limites) VALUES('finca','Castilla La Mancha', 500, ARRAY[POINT(-3,-40),POINT(3.55,3.41),POINT(2.55,-5),POINT(15.22,42.1)]);
 INSERT INTO fincas(terreno_id, tipo_finca, alquilada, alquiler_id) VALUES (5, 'avicola', false, NULL);
-INSERT INTO arrendatarios(dni, nombre, edad, sexo, fincas_alquiladas, parcelas_alquiladas) VALUES('12345E', 'Juan Carlos', 54, 'Masculino', [], []);
+INSERT INTO arrendatarios(dni, nombre, edad, sexo, fincas_alquiladas, parcelas_alquiladas) VALUES('12345E', 'Juan Carlos', 54, 'H', '{}', '{}');
 INSERT INTO alquileres(terreno_id,fecha_inicio_alquiler,periodo_arrendamiento,importe_alquiler,dni_arrendatario) VALUES(2,'2022-10-5', 12,500.5,'12345E');

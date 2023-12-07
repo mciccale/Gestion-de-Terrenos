@@ -29,6 +29,7 @@ class SQLParcelaModel {
         limites[3][1],
       ];
       let { rows } = await db.query(query, params);
+      const terRow = rows;
       query = `INSERT INTO parcelas(terreno_id, latifundio_id, alquilada, alquiler_id) VALUES($1,$2,$3,$4) RETURNING *`;
       params = [
         rows[0].id,
@@ -45,7 +46,7 @@ class SQLParcelaModel {
       ];
       await db.query(query, params);
       await db.query('COMMIT');
-      return rows[0];
+      return terRow[0];
     } catch (error) {
       await db.query('ROLLBACK');
       console.error(error);
