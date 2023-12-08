@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Parcela from "./components/Parcela";
 import RegistroTerrenos from "./components/RegistroTerrenos";
 import BajaAlquileres from "./components/BajaAlquileres";
+import ModificarAlquileres from "./components/ModificarAlquileres";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/parcelas/baja" element={<BajaParcelas />} />
           <Route path="/parcelas/modificar" element={<ModificarParcela />} />
           <Route path="/alquileres/baja" element={<BajaAlquileres />} />
+          <Route path="/alquileres/modificar" element={<ModificarAlquileres />} />
         </Routes>
       </Router>
     </>

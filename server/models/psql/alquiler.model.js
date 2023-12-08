@@ -40,6 +40,18 @@ class SQLAlquilerModel {
           console.error(error);
         }
       }
+
+      static async modifyAlquiler({alquilerId, terreno_id, fechaInicioAlquiler, periodoArrendamiento, importeAlquiler, dniArrendatario}) {
+        try {
+          const query = "UPDATE alquileres SET terreno_id=$2, fecha_inicio_alquiler=$3, periodo_arrendamiento=$4, importe_alquiler=$5, dni_arrendatario=$6 WHERE id=$1 RETURNING *";
+          const params = [alquilerId, terreno_id, fechaInicioAlquiler, periodoArrendamiento, importeAlquiler, dniArrendatario];
+          const { rows } = await db.query(query, params);
+          return rows;
+        } catch (error) {
+          console.error(error);
+          return error;
+        }
+      }
 }
 
 module.exports = { SQLAlquilerModel };

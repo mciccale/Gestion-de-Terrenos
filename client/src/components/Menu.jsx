@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import {
   Navbar, Button, Menu,
   MenuHandler,
-  MenuList,
-  MenuItem
+  MenuList
 } from "@material-tailwind/react";
 
 const MenuPrin = () => {
@@ -26,7 +25,7 @@ const MenuPrin = () => {
               </Button>
             </MenuHandler>
             <MenuList>
-              <div class="flex flex-col">
+              <div className="flex flex-col">
                 <Link style={padding} to="/terrenos">
                   <Button variant="text">
                     <Estilo texto="Listado Terrenos"></Estilo>
@@ -57,7 +56,7 @@ const MenuPrin = () => {
               </Button>
             </MenuHandler>
             <MenuList>
-              <div class="flex flex-col">
+              <div className="flex flex-col">
                 <Link style={padding} to="/parcelas/registro">
                   <Button variant="text">
                     <Estilo texto="Registro Parcelas"></Estilo>
@@ -83,10 +82,15 @@ const MenuPrin = () => {
               </Button>
             </MenuHandler>
             <MenuList>
-              <div class="flex flex-col">
+              <div className="flex flex-col">
                 <Link style={padding} to="/alquileres/baja">
                   <Button variant="text">
                     <Estilo texto="Baja Alquiler"></Estilo>
+                  </Button>
+                </Link>
+                <Link style={padding} to="/alquileres/modificar">
+                  <Button variant="text">
+                    <Estilo texto="Modificar Alquiler"></Estilo>
                   </Button>
                 </Link>
               </div>
