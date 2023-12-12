@@ -10,8 +10,12 @@ const modify = async (modifyAlquiler) => {
   const response = await axios.put(
     `${baseUrl}/${modifyAlquiler.alquilerId}`,
     modifyAlquiler
-  );
-  return response.data;
-};
-
-export default { eliminate, modify };
+    );
+    return response.data;
+  };
+  const create = async (newAlquiler) => {
+    const response = await axios.post(baseUrl, newAlquiler);
+    return response.data;
+  };
+  
+export default { eliminate, modify, create };

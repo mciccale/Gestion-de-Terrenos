@@ -14,6 +14,7 @@ import Parcela from "./components/Parcela";
 import RegistroTerrenos from "./components/RegistroTerrenos";
 import BajaAlquileres from "./components/BajaAlquileres";
 import ModificarAlquileres from "./components/ModificarAlquileres";
+import AltaAlquileres from "./components/AltaAlquileres";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/parcelas/modificar" element={<ModificarParcela />} />
           <Route path="/alquileres/baja" element={<BajaAlquileres />} />
           <Route path="/alquileres/modificar" element={<ModificarAlquileres />} />
+          <Route path="/alquileres/alta" element={<AltaAlquileres />} />
         </Routes>
       </Router>
     </>
