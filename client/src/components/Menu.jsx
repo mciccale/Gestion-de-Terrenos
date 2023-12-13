@@ -1,10 +1,12 @@
-import Estilo from "./Estilo";
-import { Link } from "react-router-dom";
+import Estilo from './Estilo';
+import { Link } from 'react-router-dom';
 import {
-  Navbar, Button, Menu,
+  Navbar,
+  Button,
+  Menu,
   MenuHandler,
-  MenuList
-} from "@material-tailwind/react";
+  MenuList,
+} from '@material-tailwind/react';
 
 const MenuPrin = () => {
   const padding = {};
@@ -96,8 +98,24 @@ const MenuPrin = () => {
               </div>
             </MenuList>
           </Menu>
+          <Menu>
+            <MenuHandler>
+              <Button variant="text">
+                <Estilo texto="Arrendatarios"></Estilo>
+              </Button>
+            </MenuHandler>
+            <MenuList>
+              <div className="flex flex-col">
+                <Link style={padding} to="/arrendatarios/registro">
+                  <Button variant="text">
+                    <Estilo texto="Registro Arrendatarios"></Estilo>
+                  </Button>
+                </Link>
+              </div>
+            </MenuList>
+          </Menu>
         </div>
-      </Navbar >
+      </Navbar>
     </>
   );
 };
