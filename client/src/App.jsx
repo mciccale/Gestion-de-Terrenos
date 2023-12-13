@@ -1,19 +1,20 @@
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import MenuPrin from "./components/Menu";
-import ListadoTerrenos from "./components/ListadoTerrenos";
-import RegistroParcelas from "./components/RegistroParcelas";
-import BajaParcelas from "./components/BajaParcelas";
-import BajaTerrenos from "./components/BajaTerrenos";
-import Home from "./components/Home";
-import ModificarTerreno from "./components/ModificarTerreno";
-import ModificarParcela from "./components/ModificarParcela";
-import Terreno from "./components/Terreno";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Parcela from "./components/Parcela";
-import RegistroTerrenos from "./components/RegistroTerrenos";
-import BajaAlquileres from "./components/BajaAlquileres";
-import ModificarAlquileres from "./components/ModificarAlquileres";
+import 'react-toastify/dist/ReactToastify.css';
+import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import MenuPrin from './components/Menu';
+import ListadoTerrenos from './components/ListadoTerrenos';
+import RegistroParcelas from './components/RegistroParcelas';
+import BajaParcelas from './components/BajaParcelas';
+import BajaTerrenos from './components/BajaTerrenos';
+import Home from './components/Home';
+import ModificarTerreno from './components/ModificarTerreno';
+import ModificarParcela from './components/ModificarParcela';
+import Terreno from './components/Terreno';
+import Parcela from './components/Parcela';
+import RegistroTerrenos from './components/RegistroTerrenos';
+import BajaAlquileres from './components/BajaAlquileres';
+import ModificarAlquileres from './components/ModificarAlquileres';
+import RegistroArrendatarios from './components/RegistroArrendatarios';
 
 function App() {
   return (
@@ -33,7 +34,14 @@ function App() {
           <Route path="/parcelas/baja" element={<BajaParcelas />} />
           <Route path="/parcelas/modificar" element={<ModificarParcela />} />
           <Route path="/alquileres/baja" element={<BajaAlquileres />} />
-          <Route path="/alquileres/modificar" element={<ModificarAlquileres />} />
+          <Route
+            path="/alquileres/modificar"
+            element={<ModificarAlquileres />}
+          />
+          <Route
+            path="/arrendatarios/registro"
+            element={<RegistroArrendatarios />}
+          />
         </Routes>
       </Router>
     </>
