@@ -10,7 +10,9 @@ const createArrendatarioRouter = ({ arrendatarioModel }) => {
   });
 
   arrendatarioRouter.post('/', arrendatarioController.addArrendatario);
-
+  arrendatarioRouter.delete('/:dni', arrendatarioController.deleteArrendatario);
+  arrendatarioRouter.put('/:dni', arrendatarioController.modifyArrendatario);
+  
   return arrendatarioRouter;
 };
 

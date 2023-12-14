@@ -131,7 +131,7 @@ const ListadoTerrenos = () => {
                         </Typography>
                       </td>
                       <td>
-                        <Link to={`/terrenos/${terrain.id}`}>
+                        <Link to={terrain.tipo_terreno == 'parcela' ? `/parcelas/${terrain.id}` : `/terrenos/${terrain.id}`}>
                           <Button variant="text">
                             <Typography
                               variant="small"

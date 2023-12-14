@@ -85,14 +85,9 @@ const MenuPrin = () => {
             </MenuHandler>
             <MenuList>
               <div className="flex flex-col">
-                <Link style={padding} to="/alquileres/baja">
+                <Link style={padding} to="/alquileres/registro">
                   <Button variant="text">
-                    <Estilo texto="Baja Alquiler"></Estilo>
-                  </Button>
-                </Link>
-                <Link style={padding} to="/alquileres/modificar">
-                  <Button variant="text">
-                    <Estilo texto="Modificar Alquiler"></Estilo>
+                    <Estilo texto="Registrar Alquiler"></Estilo>
                   </Button>
                 </Link>
               </div>
@@ -109,6 +104,20 @@ const MenuPrin = () => {
                 <Link style={padding} to="/arrendatarios/registro">
                   <Button variant="text">
                     <Estilo texto="Registro Arrendatarios"></Estilo>
+                  </Button>
+                </Link>
+              </div>
+              <div className="flex flex-col">
+                <Link style={padding} to="/arrendatarios/eliminar">
+                  <Button variant="text">
+                    <Estilo texto="Eliminar Arrendatario"></Estilo>
+                  </Button>
+                </Link>
+              </div>
+              <div className="flex flex-col">
+                <Link style={padding} to="/arrendatarios/modificar">
+                  <Button variant="text">
+                    <Estilo texto="Modificar Arrendatario"></Estilo>
                   </Button>
                 </Link>
               </div>

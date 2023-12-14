@@ -20,12 +20,12 @@ class SQLTerrainModel {
         const query = "SELECT * FROM fincas WHERE terreno_id=$1";
         const params = [terrainId];
         const { rows } = await db.query(query, params);
-        return {...result, ...rows[0] };
+        return { ...result, ...rows[0] };
       } else {
         const query = "SELECT * FROM latifundios WHERE terreno_id=$1";
         const params = [terrainId];
         const { rows } = await db.query(query, params);
-        return {...result, parcelas: rows.map((row) => row.parcela_id)};
+        return { ...result, parcelas: rows.map((row) => row.parcela_id) };
       }
     } catch (error) {
       console.error(error);
@@ -68,8 +68,9 @@ class SQLTerrainModel {
           false,
           null
         ];
+        await db.query(query, params);
       }
-      await db.query(query, params);
+
       return rows[0];
     } catch (error) {
       console.log(error);

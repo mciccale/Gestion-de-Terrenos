@@ -5,7 +5,7 @@
   "type": "commonjs",
   "main": "app.js",
   "scripts": {
-    "test": "NODE_ENV=test jest ./tests/alquileres.test.js --verbose --runInBand",
+    "test": "NODE_ENV=test jest --verbose --runInBand",
     "dev": "node index.js"
   },
   "author": "",

@@ -34,6 +34,11 @@ const Terreno = () => {
         <div className="text-lg text-gray-700 mb-2">
           <strong>Alquilada</strong>: {String(terreno.alquilada)}
         </div>
+        {terreno.alquilada ? 
+        <div className="text-lg text-gray-700 mb-2">
+          <strong>ID de Alquiler</strong>: {String(terreno.alquiler_id)}
+        </div> : 
+        <></>}
         <p className="text-lg text-gray-700 mb-2">
           <strong>Límites</strong>
         </p>

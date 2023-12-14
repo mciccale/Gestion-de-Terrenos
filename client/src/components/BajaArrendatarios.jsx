@@ -2,19 +2,19 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import FormInput from "./FormInput";
 import { Button, Card } from "@material-tailwind/react";
-import alquileres from "../services/alquileres";
+import arrendatarios from "../services/arrendatarios";
 
-const BajaAlquileres = () => {
-  const [alquilerId, setAlquilerId] = useState(0);
+const BajaArrendatarios = () => {
+  const [dni, setDni] = useState('');
 
-  const handleBajaAlquiler = async (event) => {
+  const handleBajaArrendatario = async (event) => {
     event.preventDefault();
     try {
-      await alquileres.eliminate({ alquilerId });
-      toast.success(<>Alquiler eliminado con éxito.</>);
+      await arrendatarios.eliminate(dni);
+      toast.success(<>Arrendatario eliminado con éxito.</>);
     } catch (exception) {
       if (exception.response.status === 404) {
-        toast.error("Alquiler no encontrado");
+        toast.error("Arrendatario no encontrado");
       } else {
         toast.error("Ha ocurrido un error en el servidor");
         console.log("Ha ocurrido un error en el servidor");
@@ -24,7 +24,7 @@ const BajaAlquileres = () => {
 
   const handleReset = async (event) => {
     event.preventDefault();
-    setAlquilerId(0);
+    setDni('');
   };
 
   return (
@@ -33,19 +33,19 @@ const BajaAlquileres = () => {
         <Card color="transparent" shadow={false}>
           <form
             className="w-full max-w-screen-lg sm:w-96"
-            onSubmit={handleBajaAlquiler}
+            onSubmit={handleBajaArrendatario}
           >
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="mb-1 flex flex-col gap-6">
                 <FormInput
-                  entry={alquilerId}
-                  setEntry={setAlquilerId}
-                  entryName={"ID Alquiler"}
-                  type={"number"}
+                  entry={dni}
+                  setEntry={setDni}
+                  entryName={"DNI Arrendatario"}
+                  type={"string"}
                 />
                 <div className="flex items-center w-max gap-4">
                   <Button type="submit" className="mt-6">
-                    Eliminar Alquiler
+                    Eliminar
                   </Button>
                   <Button className="mt-6" onClick={handleReset}>
                     Reset
@@ -60,4 +60,4 @@ const BajaAlquileres = () => {
   );
 };
 
-export default BajaAlquileres;
+export default BajaArrendatarios;
