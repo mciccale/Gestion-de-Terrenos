@@ -5,8 +5,7 @@ const createAlquilerRouter = ({ alquilerModel }) => {
   const alquilerRouter = Router();
   const alquilerController = new AlquilerController({ alquilerModel });
 
-  alquilerRouter.delete("/:id", alquilerController.deleteAlquiler);
-  alquilerRouter.put("/:id",alquilerController.modifyAlquiler);
+  alquilerRouter.post("/", alquilerController.addAlquiler)
 
   return alquilerRouter;
 };

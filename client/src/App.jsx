@@ -12,9 +12,10 @@ import ModificarParcela from './components/ModificarParcela';
 import Terreno from './components/Terreno';
 import Parcela from './components/Parcela';
 import RegistroTerrenos from './components/RegistroTerrenos';
-import BajaAlquileres from './components/BajaAlquileres';
-import ModificarAlquileres from './components/ModificarAlquileres';
 import RegistroArrendatarios from './components/RegistroArrendatarios';
+import AltaAlquileres from './components/RegistroAlquileres';
+import BajaArrendatarios from './components/BajaArrendatarios';
+import ModificarArrendatario from './components/ModificarArrendatario';
 
 function App() {
   return (
@@ -33,15 +34,10 @@ function App() {
           <Route path="/parcelas/registro" element={<RegistroParcelas />} />
           <Route path="/parcelas/baja" element={<BajaParcelas />} />
           <Route path="/parcelas/modificar" element={<ModificarParcela />} />
-          <Route path="/alquileres/baja" element={<BajaAlquileres />} />
-          <Route
-            path="/alquileres/modificar"
-            element={<ModificarAlquileres />}
-          />
-          <Route
-            path="/arrendatarios/registro"
-            element={<RegistroArrendatarios />}
-          />
+          <Route path="/alquileres/registro" element={<AltaAlquileres />} />
+          <Route path="/arrendatarios/registro" element={<RegistroArrendatarios />} />
+          <Route path="/arrendatarios/eliminar" element={<BajaArrendatarios />} />
+          <Route path="/arrendatarios/modificar" element={<ModificarArrendatario />} />
         </Routes>
       </Router>
     </>

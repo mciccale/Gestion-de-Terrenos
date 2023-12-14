@@ -45,7 +45,7 @@ const BajaParcelas = () => {
                 />
                 <div className="flex items-center w-max gap-4">
                   <Button type="submit" className="mt-6">
-                    Dar de Baja
+                    Eliminar
                   </Button>
                   <Button className="mt-6" onClick={handleReset}>
                     Reset

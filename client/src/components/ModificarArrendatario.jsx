@@ -8,31 +8,29 @@ import {
   Select,
   Option,
 } from '@material-tailwind/react';
-
 import FormInput from './FormInput';
 import arrendatarios from '../services/arrendatarios';
 
-const RegistroArrendatarios = () => {
+const ModificarArrendatario = () => {
   const [dni, setDni] = useState('');
   const [nombre, setNombre] = useState('');
   const [edad, setEdad] = useState(0);
   const [sexo, setSexo] = useState('');
 
-  const handleNewArrendatario = async (event) => {
+  const handleModifyArrendatario = async (event) => {
     event.preventDefault();
     try {
-      const newArrendatario = await arrendatarios.create({
-        dni,
+      const newArrendatario = await arrendatarios.modify(dni, {
         nombre,
         edad,
         sexo,
       });
       toast.success(
-        <>Arrendatario registrado con éxito. Su DNI es {newArrendatario.dni}</>
+        <>Arrendatario modificado con éxito.</>
       );
     } catch (exception) {
-      toast.error('Formato del Arrendatario Incorrecto');
-      console.log('Formato del Arrendatario Incorrecto');
+      toast.error('Arrendatario no Encontrado');
+      console.log('Arrendatario no Encontrado');
     }
   };
 
@@ -49,7 +47,7 @@ const RegistroArrendatarios = () => {
       <Card color="transparent" shadow={false}>
         <form
           className="w-full max-w-screen-lg sm:w-96"
-          onSubmit={handleNewArrendatario}
+          onSubmit={handleModifyArrendatario}
         >
           <div className="flex flex-wrap -mx-3 -mb-3">
             <div className="mb-1 flex flex-col gap-6">
@@ -89,7 +87,7 @@ const RegistroArrendatarios = () => {
               </Select>
               <div className="flex items-center w-max gap-4">
                 <Button type="submit" className="mt-6">
-                  Registrar
+                  Modificar
                 </Button>
                 <Button className="mt-6" onClick={handleReset}>
                   Reset
@@ -102,4 +100,4 @@ const RegistroArrendatarios = () => {
     </div>
   );
 };
-export default RegistroArrendatarios;
+export default ModificarArrendatario;

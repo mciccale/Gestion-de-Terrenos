@@ -31,7 +31,7 @@ beforeEach(async () => {
   });
 
   newParcelaAlquilada = await SQLParcelaModel.addParcela({
-    terreno_id: newLatifundio.id,
+    terrenoId: newLatifundio.id,
     ubicacion: "Con Alquiler",
     hectareas: 10,
     limites: [
@@ -42,14 +42,14 @@ beforeEach(async () => {
     ],
   });
   alquilerParcela = await SQLAlquilerModel.addAlquiler({
-    terreno_id: newParcelaAlquilada.id,
-    fecha_inicio_alquiler: "2022-10-5",
-    periodo_arrendamiento: 12,
-    importe_alquiler: 500.5,
-    dni_arrendatario: "12345E",
+    terrenoId: newParcelaAlquilada.id,
+    fechaInicioAlquiler: "2022-10-5",
+    periodoArrendamiento: 12,
+    importeAlquiler: 500.5,
+    dniArrendatario: "12345E",
   });
   newParcelaSinAlquiler = await SQLParcelaModel.addParcela({
-    terreno_id: newLatifundio.id,
+    terrenoId: newLatifundio.id,
     ubicacion: "Sin Alquiler",
     hectareas: 10,
     limites: [
@@ -72,11 +72,11 @@ beforeEach(async () => {
     ],
   });
   alquilerFinca = await SQLAlquilerModel.addAlquiler({
-    terreno_id: newFincaAlquilada.id,
-    fecha_inicio_alquiler: "2022-10-5",
-    periodo_arrendamiento: 12,
-    importe_alquiler: 500.5,
-    dni_arrendatario: "12345E",
+    terrenoId: newFincaAlquilada.id,
+    fechaInicioAlquiler: "2022-10-5",
+    periodoArrendamiento: 12,
+    importeAlquiler: 500.5,
+    dniArrendatario: "12345E",
   });
   newFincaSinAlquiler = await SQLTerrainModel.addTerrain({
     tipoTerreno: "finca",
@@ -91,7 +91,25 @@ beforeEach(async () => {
     ],
   });
 });
-describe("Eliminar Alquileres", () => {
+describe("Alta Alquiler", () => {
+  test("Alta exitosa", async () => {
+    // Creamos un arrendatario no existente
+    const response = await api
+      .post('/alquileres')
+      .send({
+        terrenoId: newFincaSinAlquiler.id,
+        fechaInicioAlquiler: "2002-9-19",
+        periodoArrendamiento: 252,
+        importeAlquiler: 500.5,
+        dniArrendatario: "12345E",
+      })
+      .expect(201)
+      .expect('Content-Type', /application\/json/);
+
+    expect(response.body.id).toBeDefined();
+  });
+})
+/*describe("Eliminar Alquileres", () => {
   test("Baja de Parcela con alquiler", async () => {
     console.log(newParcelaAlquilada);
     const response = await api
@@ -143,4 +161,4 @@ describe("Modificar Alquiler", () => {
     expect(updatedAlquiler).toBeDefined();
     expect(updatedAlquiler[0].periodo_arrendamiento).toBe(10);
   });
-});
+});*/

@@ -7,4 +7,14 @@ const create = async (newArrendatario) => {
   return response.data;
 };
 
-export default { create };
+const eliminate = async (dni) => {
+  const response = await axios.delete(`${baseUrl}/${dni}`);
+  return response.data;
+};
+
+const modify = async (dni, modifyArrendatario) => {
+  const response = await axios.put(`${baseUrl}/${dni}`, modifyArrendatario);
+  return response.data;
+};
+
+export default { create, eliminate, modify };

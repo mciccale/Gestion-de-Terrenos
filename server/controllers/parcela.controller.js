@@ -7,10 +7,10 @@ class ParcelaController {
       const parcela = await this.parcelaModel.getParcelaById({
         parcelaId: Number(req.params.id),
       });
-      if (!parcela) {
+      if (parcela.length === 0) {
         res.status(404).send({ error: "Not found" });
       } else {
-        res.status(200).send(parcela);
+        res.status(200).send(parcela[0]);
       }
     } catch (error) {
       console.error(error);

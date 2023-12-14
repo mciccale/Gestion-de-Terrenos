@@ -24,7 +24,7 @@ beforeEach(async () => {
   });
 
   newParcela = await SQLParcelaModel.addParcela({
-    terreno_id: newTerrain.id,
+    terrenoId: newTerrain.id,
     ubicacion: "Móstoles",
     hectareas: 10,
     limites: [
@@ -41,7 +41,7 @@ describe("Registrar Parcelas", () => {
     const response = await api
       .post("/parcelas")
       .send({
-        terreno_id: newTerrain.id,
+        terrenoId: newTerrain.id,
         ubicacion: "Navalcarnero",
         hectareas: 5,
         limites: [
@@ -53,20 +53,20 @@ describe("Registrar Parcelas", () => {
       })
       .expect(200)
       .expect("Content-Type", /application\/json/);
+    console.log(response.body)
+    expect(response.body.id).toBeDefined();
 
-    expect(response.body.terreno_id).toBeDefined();
-
-    const get = await api.get('/parcelas/' + response.body.terreno_id)
+    const get = await api.get('/parcelas/' + response.body.id)
       .expect(200)
       .expect('Content-Type', /application\/json/)
-    expect(get.body.terreno_id).toEqual(response.body.terreno_id)
+    expect(get.body.terreno_id).toEqual(response.body.id)
   });
 
   test("Terreno inexistente", async () => {
     await api
       .post("/parcelas")
       .send({
-        terreno_id: 4,
+        terrenoId: 4,
         ubicacion: "No existente",
         hectareas: 5,
         limites: [
@@ -84,7 +84,7 @@ describe("Registrar Parcelas", () => {
     await api
       .post("/parcelas")
       .send({
-        terreno_id: 4,
+        terrenoId: 4,
         ubicacion: "No existente",
         hectareas: 5,
         limites: [[10], [10, 10], [10, 10], [10, 10]],
@@ -94,7 +94,7 @@ describe("Registrar Parcelas", () => {
 });
 describe("Baja Parcela", () => {
   test("Parcela Existente", async () => {
-    await api.delete("/parcelas/" + newParcela.terreno_id).expect(200);
+    await api.delete("/parcelas/" + newParcela.id).expect(200);
   });
   test("Parcela inexistente", async () => {
     await api.delete("/parcelas/" + 4).expect(404);

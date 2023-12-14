@@ -6,7 +6,7 @@ import parcelas from "../services/parcelas";
 import { Card, Button, Typography, Input } from "@material-tailwind/react";
 
 const RegistroParcelas = () => {
-  const [terreno_id, setTerreno_id] = useState(0);
+  const [terrenoId, setTerrenoId] = useState(0);
   const [ubicacion, setUbicacion] = useState("");
   const [hectareas, setHectareas] = useState(0);
   const [limites, setLimites] = useState([
@@ -20,7 +20,7 @@ const RegistroParcelas = () => {
     event.preventDefault();
     try {
       const response = await parcelas.create({
-        terreno_id,
+        terrenoId,
         ubicacion,
         hectareas,
         limites,
@@ -44,7 +44,7 @@ const RegistroParcelas = () => {
 
   const handleReset = async (event) => {
     event.preventDefault();
-    setTerreno_id(0);
+    setTerrenoId(0);
     setUbicacion("");
     setHectareas(0);
     setLimites([
@@ -65,8 +65,8 @@ const RegistroParcelas = () => {
           <div className="flex flex-wrap -mx-3 -mb-3">
             <div className="mb-1 flex flex-col gap-6">
               <FormInput
-                entry={terreno_id}
-                setEntry={setTerreno_id}
+                entry={terrenoId}
+                setEntry={setTerrenoId}
                 entryName={"ID Latifundio"}
                 type={"number"}
               />
@@ -94,7 +94,7 @@ const RegistroParcelas = () => {
               <FormInputPoint limites={limites} setLimites={setLimites} />
               <div className="flex items-center w-max gap-4">
                 <Button type="submit" className="mt-6">
-                  Create
+                  Registrar
                 </Button>
                 <Button className="mt-6" onClick={handleReset}>
                   Reset

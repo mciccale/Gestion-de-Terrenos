@@ -29,6 +29,14 @@ const Parcela = () => {
         <p className="text-lg text-gray-700 mb-2">
           <strong>Límites</strong>
         </p>
+        <div className="text-lg text-gray-700 mb-2">
+          <strong>Alquilada</strong>: {String(parcela.alquilada)}
+        </div>
+        {parcela.alquilada ?
+          <div className="text-lg text-gray-700 mb-2">
+            <strong>ID de Alquiler</strong>: {String(parcela.alquiler_id)}
+          </div> :
+          <></>}
         {parcela.limites.map(({ x, y }, i) => {
           return (
             <div key={i} className="text-lg text-gray-700 mb-2">
