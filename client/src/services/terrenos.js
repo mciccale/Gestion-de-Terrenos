@@ -24,7 +24,7 @@ const create = async (newTerreno) => {
 
 const modify = async (modifyTerreno) => {
   const response = await axios.put(
-    `${baseUrl}/${modifyTerreno.terreno_id}`,
+    `${baseUrl}/${modifyTerreno.terrenoId}`,
     modifyTerreno
   );
   return response.data;

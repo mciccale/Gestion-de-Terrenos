@@ -6,7 +6,7 @@ import FormInputPoint from "./FormInputPoint";
 import { Card, Typography, Input, Button } from "@material-tailwind/react";
 
 const ModificarTerreno = () => {
-  const [terreno_id, setTerreno_id] = useState(0);
+  const [terrenoId, setTerrenoId] = useState(0);
   const [ubicacion, setUbicacion] = useState("");
   const [hectareas, setHectareas] = useState(0);
   const [limites, setLimites] = useState([
@@ -20,7 +20,7 @@ const ModificarTerreno = () => {
     event.preventDefault();
     try {
       const modTerreno = await terrenos.modify({
-        terreno_id,
+        terrenoId,
         ubicacion,
         hectareas,
         limites,
@@ -38,7 +38,7 @@ const ModificarTerreno = () => {
 
   const handleReset = async (event) => {
     event.preventDefault();
-    setTerreno_id(0);
+    setTerrenoId(0);
     setUbicacion("");
     setHectareas(0);
     setLimites([
@@ -60,8 +60,8 @@ const ModificarTerreno = () => {
             <div className="flex flex-wrap -mx-3 -mb-3">
               <div className="mb-1 flex flex-col gap-6">
                 <FormInput
-                  entry={terreno_id}
-                  setEntry={setTerreno_id}
+                  entry={terrenoId}
+                  setEntry={setTerrenoId}
                   entryName={"ID Terreno"}
                   type={"number"}
                 />
@@ -89,7 +89,7 @@ const ModificarTerreno = () => {
                 <FormInputPoint limites={limites} setLimites={setLimites} />
                 <div className="flex items-center w-max gap-4">
                   <Button type="submit" className="mt-6">
-                    Create
+                    Modificar
                   </Button>
                   <Button className="mt-6" onClick={handleReset}>
                     Reset

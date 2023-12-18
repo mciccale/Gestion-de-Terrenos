@@ -6,7 +6,7 @@ import FormInputPoint from "./FormInputPoint";
 import { Card, Typography, Input, Button } from "@material-tailwind/react";
 
 const ModificarParcela = () => {
-  const [parcela_id, setParcela_id] = useState(0);
+  const [parcelaId, setParcelaId] = useState(0);
   const [ubicacion, setUbicacion] = useState("");
   const [hectareas, setHectareas] = useState(0);
   const [limites, setLimites] = useState([
@@ -20,7 +20,7 @@ const ModificarParcela = () => {
     event.preventDefault();
     try {
       const modparcela = await parcelas.modify({
-        parcela_id,
+        parcelaId,
         ubicacion,
         hectareas,
         limites,
@@ -39,7 +39,7 @@ const ModificarParcela = () => {
 
   const handleReset = async (event) => {
     event.preventDefault();
-    setParcela_id(0);
+    setParcelaId(0);
     setUbicacion("");
     setHectareas(0);
     setLimites([
@@ -61,8 +61,8 @@ const ModificarParcela = () => {
             <div className="flex flex-wrap -mx-3 -mb-3">
               <div className="mb-1 flex flex-col gap-6">
                 <FormInput
-                  entry={parcela_id}
-                  setEntry={setParcela_id}
+                  entry={parcelaId}
+                  setEntry={setParcelaId}
                   entryName={"ID parcela"}
                   type={"number"}
                 />
@@ -90,7 +90,7 @@ const ModificarParcela = () => {
                 <FormInputPoint limites={limites} setLimites={setLimites} />
                 <div className="flex items-center w-max gap-4">
                   <Button type="submit" className="mt-6">
-                    Create
+                    Modificar
                   </Button>
                   <Button className="mt-6" onClick={handleReset}>
                     Reset

@@ -1,20 +1,20 @@
 import { toast } from "react-toastify";
 import { useState } from "react";
 import FormInput from "./FormInput";
-import parcelas from "../services/parcelas";
 import { Button, Card } from "@material-tailwind/react";
+import arrendatarios from "../services/arrendatarios";
 
-const BajaParcelas = () => {
-  const [parcela_id, setParcela_id] = useState(0);
+const BajaArrendatarios = () => {
+  const [dni, setDni] = useState('');
 
-  const handleBajaParcela = async (event) => {
+  const handleBajaArrendatario = async (event) => {
     event.preventDefault();
     try {
-      await parcelas.eliminate({ parcela_id });
-      toast.success(<>Parcela eliminada con éxito.</>);
+      await arrendatarios.eliminate(dni);
+      toast.success(<>Arrendatario eliminado con éxito.</>);
     } catch (exception) {
       if (exception.response.status === 404) {
-        toast.error("Parcela no encontrada");
+        toast.error("Arrendatario no encontrado");
       } else {
         toast.error("Ha ocurrido un error en el servidor");
         console.log("Ha ocurrido un error en el servidor");
@@ -24,7 +24,7 @@ const BajaParcelas = () => {
 
   const handleReset = async (event) => {
     event.preventDefault();
-    setParcela_id(0);
+    setDni('');
   };
 
   return (
@@ -33,15 +33,15 @@ const BajaParcelas = () => {
         <Card color="transparent" shadow={false}>
           <form
             className="w-full max-w-screen-lg sm:w-96"
-            onSubmit={handleBajaParcela}
+            onSubmit={handleBajaArrendatario}
           >
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="mb-1 flex flex-col gap-6">
                 <FormInput
-                  entry={parcela_id}
-                  setEntry={setParcela_id}
-                  entryName={"ID Parcela"}
-                  type={"number"}
+                  entry={dni}
+                  setEntry={setDni}
+                  entryName={"DNI Arrendatario"}
+                  type={"string"}
                 />
                 <div className="flex items-center w-max gap-4">
                   <Button type="submit" className="mt-6">
@@ -60,4 +60,4 @@ const BajaParcelas = () => {
   );
 };
 
-export default BajaParcelas;
+export default BajaArrendatarios;

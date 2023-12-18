@@ -20,12 +20,12 @@ class SQLTerrainModel {
         const query = "SELECT * FROM fincas WHERE terreno_id=$1";
         const params = [terrainId];
         const { rows } = await db.query(query, params);
-        return {...result, ...rows[0] };
+        return { ...result, ...rows[0] };
       } else {
         const query = "SELECT * FROM latifundios WHERE terreno_id=$1";
         const params = [terrainId];
         const { rows } = await db.query(query, params);
-        return {...result, parcelas: rows.map((row) => row.parcela_id)};
+        return { ...result, parcelas: rows.map((row) => row.parcela_id) };
       }
     } catch (error) {
       console.error(error);
@@ -33,7 +33,7 @@ class SQLTerrainModel {
   }
   static async deleteTerreno(terrenoId) {
     try {
-      const query = "DELETE FROM terrenos WHERE id=$1 RETURNING *";
+      const query = "DELETE FROM terrenos WHERE id=$1 AND (tipo_terreno='finca' OR tipo_terreno='latifundio') RETURNING *";
       const params = [terrenoId];
       const { rows } = await db.query(query, params);
       return rows;
@@ -61,18 +61,16 @@ class SQLTerrainModel {
       ];
       const { rows } = await db.query(query, params);
       if (tipoTerreno == "finca") {
-        query = "INSERT INTO fincas(terreno_id, tipo_finca, alquilada, fecha_inicio_alquiler, periodo_arrendamiento, importe_alquiler, dni_arrendatario) VALUES ($1,$2,$3,$4,$5,$6,$7)";
+        query = "INSERT INTO fincas(terreno_id, tipo_finca, alquilada, alquiler_id) VALUES ($1,$2,$3,$4)";
         params = [
           rows[0].id,
           tipoFinca,
           false,
-          null,
-          null,
-          null,
           null
         ];
+        await db.query(query, params);
       }
-      await db.query(query, params);
+
       return rows[0];
     } catch (error) {
       console.log(error);
@@ -81,7 +79,7 @@ class SQLTerrainModel {
   static async modifyTerrain({ terrenoId, ubicacion, hectareas, limites }) {
     try {
       const query =
-        "UPDATE terrenos SET ubicacion=$2,hectareas=$3,limites=ARRAY[POINT($4,$5),POINT($6,$7),POINT($8,$9),POINT($10,$11)] where id=$1 RETURNING *";
+        "UPDATE terrenos SET ubicacion=$2,hectareas=$3,limites=ARRAY[POINT($4,$5),POINT($6,$7),POINT($8,$9),POINT($10,$11)] where id=$1 AND (tipo_terreno='finca' OR tipo_terreno='latifundio') RETURNING *";
       const params = [
         terrenoId,
         ubicacion,
